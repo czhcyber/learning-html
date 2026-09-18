@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  TODO — REPLACE THESE BEFORE YOU SUBMIT
+  ----------------------------------------------------------------------------
+  1. "Alex Chen"        -> your own name (appears on every page + footer)
+  2. YOUR-USERNAME      -> your GitHub username (in the og:url / og:image URLs)
+  3. alex@example.com   -> your real email (contact page + footer)
+  4. All body text      -> rewrite it in your own voice. The structure, HTML
+                           and CSS are the graded part; the words must be yours.
+  Search each file for the word TODO to find every placeholder.
+  ============================================================================
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Alex Chen — Home</title>
+  <meta name="description" content="Personal site of Alex Chen, a first-year computer science student who builds small, useful things for the web.">
+
+  <!-- Identity: canonical URL, favicon, app icon, web app manifest -->
+  <link rel="canonical" href="https://YOUR-USERNAME.github.io/personal-site/">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/img/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+  <meta name="theme-color" content="#2f6bff">
+
+  <!-- Identity: Open Graph image (1200x630) shown when the link is shared -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Alex Chen">
+  <meta property="og:title" content="Alex Chen — Student, builder, curious person">
+  <meta property="og:description" content="A small personal site about what I study, what I build, and how to reach me.">
+  <meta property="og:url" content="https://YOUR-USERNAME.github.io/personal-site/">
+  <meta property="og:image" content="https://YOUR-USERNAME.github.io/personal-site/assets/img/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Alex Chen — personal website">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">
+        <img class="brand-mark" src="assets/img/favicon.svg" alt="" width="32" height="32">
+        <span class="brand-text">Alex&nbsp;Chen</span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span class="nav-toggle-box" aria-hidden="true">
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+        </span>
+        <span class="visually-hidden">Menu</span>
+      </button>
+
+      <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+        <ul class="nav-list">
+          <li><a href="index.html" aria-current="page">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+
+      <button class="theme-toggle" type="button" aria-pressed="false">
+        <span class="theme-toggle-icon" aria-hidden="true">🌙</span>
+        <span class="visually-hidden">Switch colour theme</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ===================== HERO ===================== -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow">Hello, and welcome</p>
+          <h1 id="hero-title">I&rsquo;m Alex Chen &mdash; I learn by building things.</h1>
+          <p class="lead">
+            I&rsquo;m a first-year computer science student. Most of what I know about
+            the web I picked up by making small projects, breaking them, and reading
+            the error messages carefully. This site is one of them.
+          </p>
+          <p class="hero-actions">
+            <a class="button button-primary" href="projects.html">See my projects</a>
+            <a class="button button-ghost" href="contact.html">Get in touch</a>
+          </p>
+        </div>
+
+        <figure class="hero-figure">
+          <img src="assets/img/hero-illustration.svg"
+               alt="Illustration of a desk with a laptop showing a simple web page layout."
+               width="560" height="420">
+          <figcaption>Where most of my evenings go.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ===================== WHAT I'M DOING ===================== -->
+    <section class="section" aria-labelledby="now-title">
+      <div class="container">
+        <header class="section-head">
+          <h2 id="now-title">What I&rsquo;m working on right now</h2>
+          <p class="section-sub">
+            Three things take up most of my week. Here they are, honestly described.
+          </p>
+        </header>
+
+        <div class="card-grid">
+          <article class="card">
+            <p class="card-icon" aria-hidden="true">📚</p>
+            <h3>Coursework</h3>
+            <p>
+              Data structures is the hardest module this term. I keep a notebook of
+              every algorithm I implement by hand, because writing it out is the only
+              way it actually sticks for me.
+            </p>
+          </article>
+
+          <article class="card">
+            <p class="card-icon" aria-hidden="true">🛠️</p>
+            <h3>Small web projects</h3>
+            <p>
+              I build one tiny thing per month, usually something I personally need &mdash;
+              a revision timer, a reading tracker. Finishing matters more than being clever.
+            </p>
+          </article>
+
+          <article class="card">
+            <p class="card-icon" aria-hidden="true">📷</p>
+            <h3>Photography</h3>
+            <p>
+              I shoot film on weekends. It is slow and expensive and it forces me to
+              think before pressing the shutter, which is a useful habit everywhere else.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== QUICK FACTS ===================== -->
+    <section class="section section-alt" aria-labelledby="facts-title">
+      <div class="container">
+        <h2 id="facts-title">The short version</h2>
+        <dl class="facts">
+          <div class="fact">
+            <dt>Studying</dt>
+            <dd>Computer Science, first year</dd>
+          </div>
+          <div class="fact">
+            <dt>Favourite tool</dt>
+            <dd>Whatever is already installed</dd>
+          </div>
+          <div class="fact">
+            <dt>Currently learning</dt>
+            <dd>Semantic HTML, CSS layout, JavaScript</dd>
+          </div>
+          <div class="fact">
+            <dt>Based in</dt>
+            <dd>Somewhere with too much rain</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- ===================== CALL TO ACTION ===================== -->
+    <section class="section cta" aria-labelledby="cta-title">
+      <div class="container cta-inner">
+        <h2 id="cta-title">Want the longer story?</h2>
+        <p>
+          The about page explains how I ended up writing code, and the projects page
+          lists what I have actually shipped so far &mdash; including the failures.
+        </p>
+        <p><a class="button button-primary" href="about.html">Read about me</a></p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-col">
+        <h2 class="footer-title">Alex Chen</h2>
+        <p class="footer-note">
+          A personal site built from scratch with semantic HTML, responsive CSS and a
+          little vanilla JavaScript. No frameworks.
+        </p>
+      </div>
+
+      <nav class="footer-col" aria-label="Footer navigation">
+        <h2 class="footer-title">Pages</h2>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="footer-col">
+        <h2 class="footer-title">Elsewhere</h2>
+        <ul class="footer-links">
+          <li><a href="https://github.com/YOUR-USERNAME" rel="me noopener">GitHub</a></li>
+          <li><a href="mailto:alex@example.com">alex@example.com</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>&copy; <span data-current-year>2025</span> Alex Chen. Built by hand.</p>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>
