@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<!-- TODO: replace "Alex Chen", YOUR-USERNAME and alex@example.com, and rewrite the text in your own words. -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Projects — Alex Chen</title>
+  <meta name="description" content="Small web projects built by Alex Chen, including the ones that did not work out.">
+
+  <link rel="canonical" href="https://YOUR-USERNAME.github.io/personal-site/projects.html">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/img/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+  <meta name="theme-color" content="#2f6bff">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Alex Chen">
+  <meta property="og:title" content="Projects by Alex Chen">
+  <meta property="og:description" content="Small web projects, including the ones that did not work out.">
+  <meta property="og:url" content="https://YOUR-USERNAME.github.io/personal-site/projects.html">
+  <meta property="og:image" content="https://YOUR-USERNAME.github.io/personal-site/assets/img/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Alex Chen — personal website">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">
+        <img class="brand-mark" src="assets/img/favicon.svg" alt="" width="32" height="32">
+        <span class="brand-text">Alex&nbsp;Chen</span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span class="nav-toggle-box" aria-hidden="true">
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+        </span>
+        <span class="visually-hidden">Menu</span>
+      </button>
+
+      <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+        <ul class="nav-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="projects.html" aria-current="page">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+
+      <button class="theme-toggle" type="button" aria-pressed="false">
+        <span class="theme-toggle-icon" aria-hidden="true">🌙</span>
+        <span class="visually-hidden">Switch colour theme</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ===================== INTRO ===================== -->
+    <section class="page-head" aria-labelledby="page-title">
+      <div class="container">
+        <p class="eyebrow">Projects</p>
+        <h1 id="page-title">Things I have actually finished</h1>
+        <p class="lead">
+          I keep this list short on purpose. Everything here runs, even if some of it
+          only runs well enough for me.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================== FILTER + LIST ===================== -->
+    <section class="section" aria-labelledby="list-title">
+      <div class="container">
+        <h2 id="list-title" class="visually-hidden">Project list</h2>
+
+        <div class="filter-bar" role="group" aria-label="Filter projects by type">
+          <button class="filter-button is-active" type="button" data-filter="all" aria-pressed="true">
+            All
+          </button>
+          <button class="filter-button" type="button" data-filter="web" aria-pressed="false">
+            Web
+          </button>
+          <button class="filter-button" type="button" data-filter="coursework" aria-pressed="false">
+            Coursework
+          </button>
+          <button class="filter-button" type="button" data-filter="experiment" aria-pressed="false">
+            Experiments
+          </button>
+        </div>
+
+        <p class="filter-status" role="status" data-filter-status>
+          Showing all 4 projects.
+        </p>
+
+        <div class="project-grid" data-project-grid>
+
+          <article class="project" data-tags="web">
+            <figure class="project-figure">
+              <img src="assets/img/project-1.svg" alt="Abstract preview of a study timer interface." width="480" height="300">
+            </figure>
+            <div class="project-body">
+              <h3>Study Timer</h3>
+              <p>
+                A countdown timer for revision sessions. I built it because every timer
+                app I tried wanted an account. It stores your last session length in
+                local storage and does nothing else.
+              </p>
+              <ul class="tag-list">
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>JavaScript</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="project" data-tags="coursework">
+            <figure class="project-figure">
+              <img src="assets/img/project-2.svg" alt="Abstract preview of a sorted data visualisation." width="480" height="300">
+            </figure>
+            <div class="project-body">
+              <h3>Sorting Visualiser</h3>
+              <p>
+                An animated comparison of four sorting algorithms, written for a data
+                structures assignment. Watching bubble sort lose to merge sort is far
+                more convincing than a complexity table.
+              </p>
+              <ul class="tag-list">
+                <li>Algorithms</li>
+                <li>Canvas</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="project" data-tags="web experiment">
+            <figure class="project-figure">
+              <img src="assets/img/project-3.svg" alt="Abstract preview of a grid of photo thumbnails." width="480" height="300">
+            </figure>
+            <div class="project-body">
+              <h3>Film Log</h3>
+              <p>
+                A one-page log of every roll of film I have shot, with the camera, the
+                stock and a note about what went wrong. Responsive CSS grid does all
+                the work; there is no backend at all.
+              </p>
+              <ul class="tag-list">
+                <li>HTML</li>
+                <li>CSS Grid</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="project" data-tags="experiment">
+            <figure class="project-figure">
+              <img src="assets/img/project-4.svg" alt="Abstract preview of a keyboard focus outline experiment." width="480" height="300">
+            </figure>
+            <div class="project-body">
+              <h3>Keyboard-Only Test</h3>
+              <p>
+                An experiment rather than a product: I removed all mouse styling from a
+                page and tried to use it with the keyboard alone. The write-up of what
+                broke is more useful than the page itself, and it changed how I write
+                markup.
+              </p>
+              <ul class="tag-list">
+                <li>Accessibility</li>
+                <li>Write-up</li>
+              </ul>
+            </div>
+          </article>
+
+        </div>
+
+        <p class="empty-state" data-empty-state hidden>
+          Nothing in this category yet &mdash; check back after the next holiday.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================== WHAT I LEARNED ===================== -->
+    <section class="section section-alt" aria-labelledby="lessons-title">
+      <div class="container">
+        <h2 id="lessons-title">What building these taught me</h2>
+        <div class="card-grid">
+          <article class="card">
+            <h3>Finish small things</h3>
+            <p>
+              A finished tiny project teaches more than an unfinished ambitious one. I
+              now deliberately shrink scope until finishing is realistic.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Read the error</h3>
+            <p>
+              Most of my early time was spent guessing. Reading the actual message, all
+              the way through, is faster every single time.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Commit early</h3>
+            <p>
+              Committing at each working step means I can always get back to the last
+              version that behaved. The history of this site is proof of that habit.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-col">
+        <h2 class="footer-title">Alex Chen</h2>
+        <p class="footer-note">
+          A personal site built from scratch with semantic HTML, responsive CSS and a
+          little vanilla JavaScript. No frameworks.
+        </p>
+      </div>
+
+      <nav class="footer-col" aria-label="Footer navigation">
+        <h2 class="footer-title">Pages</h2>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="footer-col">
+        <h2 class="footer-title">Elsewhere</h2>
+        <ul class="footer-links">
+          <li><a href="https://github.com/YOUR-USERNAME" rel="me noopener">GitHub</a></li>
+          <li><a href="mailto:alex@example.com">alex@example.com</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>&copy; <span data-current-year>2025</span> Alex Chen. Built by hand.</p>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>

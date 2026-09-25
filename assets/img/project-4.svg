@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" role="img"
+     aria-labelledby="p4-title">
+  <title id="p4-title">Preview of the Keyboard-Only Test project: a keyboard with a visible focus ring</title>
+  <!-- Original illustration drawn for this site. -->
+  <defs>
+    <linearGradient id="p4bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e8edff"/>
+      <stop offset="1" stop-color="#f6f7fb"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="480" height="300" fill="url(#p4bg)"/>
+
+  <!-- keyboard body -->
+  <rect x="48" y="76" width="384" height="164" rx="16" fill="#fff" stroke="#dfe3ed" stroke-width="2"/>
+
+  <!-- key rows, drawn as small rounded rectangles -->
+  <g fill="#eef1f8" stroke="#dfe3ed" stroke-width="1.5">
+    <!-- row 1 -->
+    <rect x="68"  y="96"  width="30" height="26" rx="6"/>
+    <rect x="104" y="96"  width="30" height="26" rx="6"/>
+    <rect x="140" y="96"  width="30" height="26" rx="6"/>
+    <rect x="176" y="96"  width="30" height="26" rx="6"/>
+    <rect x="212" y="96"  width="30" height="26" rx="6"/>
+    <rect x="248" y="96"  width="30" height="26" rx="6"/>
+    <rect x="284" y="96"  width="30" height="26" rx="6"/>
+    <rect x="320" y="96"  width="30" height="26" rx="6"/>
+    <rect x="356" y="96"  width="56" height="26" rx="6"/>
+
+    <!-- row 2 -->
+    <rect x="68"  y="128" width="42" height="26" rx="6"/>
+    <rect x="116" y="128" width="30" height="26" rx="6"/>
+    <rect x="152" y="128" width="30" height="26" rx="6"/>
+    <rect x="188" y="128" width="30" height="26" rx="6"/>
+    <rect x="224" y="128" width="30" height="26" rx="6"/>
+    <rect x="260" y="128" width="30" height="26" rx="6"/>
+    <rect x="296" y="128" width="30" height="26" rx="6"/>
+    <rect x="332" y="128" width="80" height="26" rx="6"/>
+
+    <!-- row 3 -->
+    <rect x="68"  y="160" width="52" height="26" rx="6"/>
+    <rect x="126" y="160" width="30" height="26" rx="6"/>
+    <rect x="162" y="160" width="30" height="26" rx="6"/>
+    <rect x="198" y="160" width="30" height="26" rx="6"/>
+    <rect x="234" y="160" width="30" height="26" rx="6"/>
+    <rect x="270" y="160" width="30" height="26" rx="6"/>
+    <rect x="306" y="160" width="106" height="26" rx="6"/>
+  </g>
+
+  <!-- the Tab key, highlighted, with a visible focus ring -->
+  <g>
+    <rect x="68" y="192" width="66" height="26" rx="6" fill="#2f5bff"/>
+    <text x="101" y="210" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif"
+          font-size="13" font-weight="700" fill="#fff">Tab</text>
+    <rect x="62" y="186" width="78" height="38" rx="10" fill="none" stroke="#7a4dff" stroke-width="3" stroke-dasharray="6 5"/>
+  </g>
+
+  <!-- focus indicator arrow pointing at the ring -->
+  <g transform="translate(140 150)">
+    <path d="M34 46C20 34 8 22 2 8" fill="none" stroke="#7a4dff" stroke-width="3" stroke-linecap="round"/>
+    <path d="M8 12l-6-6-4 8Z" fill="#7a4dff"/>
+  </g>
+
+  <!-- remaining space bar row -->
+  <g fill="#eef1f8" stroke="#dfe3ed" stroke-width="1.5">
+    <rect x="144" y="192" width="30" height="26" rx="6"/>
+    <rect x="180" y="192" width="30" height="26" rx="6"/>
+    <rect x="216" y="192" width="142" height="26" rx="6"/>
+    <rect x="364" y="192" width="48" height="26" rx="6"/>
+  </g>
+
+  <!-- caption strip -->
+  <rect x="48" y="252" width="164" height="12" rx="6" fill="#dfe3ed"/>
+</svg>

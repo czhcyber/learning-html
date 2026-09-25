@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" role="img"
+     aria-labelledby="p1-title">
+  <title id="p1-title">Preview of the Study Timer project: a circular countdown timer</title>
+  <!-- Original illustration drawn for this site. -->
+  <defs>
+    <linearGradient id="p1bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e8edff"/>
+      <stop offset="1" stop-color="#f6f7fb"/>
+    </linearGradient>
+    <linearGradient id="p1arc" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2f5bff"/>
+      <stop offset="1" stop-color="#7a4dff"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="480" height="300" fill="url(#p1bg)"/>
+
+  <!-- window chrome -->
+  <rect x="40" y="34" width="400" height="232" rx="14" fill="#fff" stroke="#dfe3ed" stroke-width="2"/>
+  <line x1="40" y1="66" x2="440" y2="66" stroke="#dfe3ed" stroke-width="2"/>
+  <circle cx="60" cy="50" r="5" fill="#ff8b7b"/>
+  <circle cx="78" cy="50" r="5" fill="#ffd166"/>
+  <circle cx="96" cy="50" r="5" fill="#7bd88f"/>
+
+  <!-- timer ring -->
+  <g transform="translate(158 168)">
+    <circle r="56" fill="none" stroke="#eef1f8" stroke-width="16"/>
+    <!-- 270 degrees of progress, starting at the top -->
+    <path d="M0 -56 A56 56 0 1 1 -56 0" fill="none" stroke="url(#p1arc)" stroke-width="16" stroke-linecap="round"/>
+    <circle r="34" fill="#fff"/>
+    <text x="0" y="6" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif"
+          font-size="24" font-weight="700" fill="#14161c">17:30</text>
+  </g>
+
+  <!-- controls -->
+  <g transform="translate(252 132)">
+    <rect x="0" y="0" width="94" height="30" rx="15" fill="#2f5bff"/>
+    <path d="M30 9v12l12-6-12-6Z" fill="#fff"/>
+    <rect x="52" y="10" width="24" height="10" rx="3" fill="#fff" opacity=".85"/>
+
+    <rect x="0" y="44" width="94" height="30" rx="15" fill="#eef1f8" stroke="#dfe3ed" stroke-width="2"/>
+    <path d="M32 51v16" stroke="#5b6273" stroke-width="4" stroke-linecap="round"/>
+    <path d="M40 51v16" stroke="#5b6273" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="66" cy="59" r="8" fill="none" stroke="#5b6273" stroke-width="4"/>
+
+    <!-- session length chips -->
+    <rect x="0" y="92" width="30" height="22" rx="11" fill="#e8edff"/>
+    <rect x="36" y="92" width="30" height="22" rx="11" fill="#e8edff"/>
+    <rect x="72" y="92" width="30" height="22" rx="11" fill="#e8edff"/>
+
+    <!-- label lines -->
+    <rect x="0" y="128" width="86" height="7" rx="3.5" fill="#dfe3ed"/>
+    <rect x="0" y="142" width="60" height="7" rx="3.5" fill="#dfe3ed"/>
+  </g>
+</svg>
