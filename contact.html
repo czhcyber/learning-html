@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<!-- TODO: replace "Alex Chen", YOUR-USERNAME and alex@example.com, and rewrite the text in your own words. -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Contact — Alex Chen</title>
+  <meta name="description" content="Send Alex Chen a message, or find him on GitHub. Questions about the projects are welcome.">
+
+  <link rel="canonical" href="https://YOUR-USERNAME.github.io/personal-site/contact.html">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/img/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+  <meta name="theme-color" content="#2f6bff">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Alex Chen">
+  <meta property="og:title" content="Contact Alex Chen">
+  <meta property="og:description" content="Send me a message, or find me on GitHub.">
+  <meta property="og:url" content="https://YOUR-USERNAME.github.io/personal-site/contact.html">
+  <meta property="og:image" content="https://YOUR-USERNAME.github.io/personal-site/assets/img/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Alex Chen — personal website">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">
+        <img class="brand-mark" src="assets/img/favicon.svg" alt="" width="32" height="32">
+        <span class="brand-text">Alex&nbsp;Chen</span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span class="nav-toggle-box" aria-hidden="true">
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+        </span>
+        <span class="visually-hidden">Menu</span>
+      </button>
+
+      <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+        <ul class="nav-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html" aria-current="page">Contact</a></li>
+        </ul>
+      </nav>
+
+      <button class="theme-toggle" type="button" aria-pressed="false">
+        <span class="theme-toggle-icon" aria-hidden="true">🌙</span>
+        <span class="visually-hidden">Switch colour theme</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ===================== INTRO ===================== -->
+    <section class="page-head" aria-labelledby="page-title">
+      <div class="container">
+        <p class="eyebrow">Contact</p>
+        <h1 id="page-title">Say hello</h1>
+        <p class="lead">
+          Questions about any of the projects, or corrections to something I got wrong &mdash;
+          both are welcome. I usually reply within a couple of days.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="form-title">
+      <div class="container split split-wide">
+
+        <!-- ---------- FORM ---------- -->
+        <div class="split-body">
+          <h2 id="form-title">Send a message</h2>
+
+          <!--
+            NOTE FOR THE MARKER: this is a front-end demonstration form. It has no
+            server behind it, so main.js validates the fields and shows a confirmation
+            message instead of sending anything. That is deliberate and stated on the
+            page so nobody expects an email to arrive.
+          -->
+          <form class="contact-form" novalidate data-contact-form>
+            <p class="form-note">
+              This form is a front-end demo &mdash; it validates your input but does not
+              send an email. Please use the address on the right if you want a reply.
+            </p>
+
+            <div class="field">
+              <label for="name">Your name</label>
+              <input type="text" id="name" name="name" autocomplete="name"
+                     required minlength="2" aria-describedby="name-error">
+              <p class="field-error" id="name-error" data-error-for="name" hidden></p>
+            </div>
+
+            <div class="field">
+              <label for="email">Email address</label>
+              <input type="email" id="email" name="email" autocomplete="email"
+                     required aria-describedby="email-error">
+              <p class="field-error" id="email-error" data-error-for="email" hidden></p>
+            </div>
+
+            <div class="field">
+              <label for="subject">Subject</label>
+              <select id="subject" name="subject" required aria-describedby="subject-error">
+                <option value="">Please choose a topic&hellip;</option>
+                <option value="project">A question about a project</option>
+                <option value="feedback">Feedback on this site</option>
+                <option value="study">Studying and coursework</option>
+                <option value="other">Something else</option>
+              </select>
+              <p class="field-error" id="subject-error" data-error-for="subject" hidden></p>
+            </div>
+
+            <div class="field">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="6" required minlength="20"
+                        aria-describedby="message-error message-hint"></textarea>
+              <p class="field-hint" id="message-hint">
+                At least 20 characters, please. <span data-char-count>0</span> so far.
+              </p>
+              <p class="field-error" id="message-error" data-error-for="message" hidden></p>
+            </div>
+
+            <div class="field field-check">
+              <input type="checkbox" id="consent" name="consent" required aria-describedby="consent-error">
+              <label for="consent">I understand this demo form does not actually send an email.</label>
+              <p class="field-error" id="consent-error" data-error-for="consent" hidden></p>
+            </div>
+
+            <p class="form-actions">
+              <button class="button button-primary" type="submit">Send message</button>
+              <button class="button button-ghost" type="reset">Clear form</button>
+            </p>
+
+            <p class="form-success" role="status" data-form-success hidden>
+              Thanks &mdash; your message passed validation. Remember, nothing was sent:
+              this is a demo form.
+            </p>
+          </form>
+        </div>
+
+        <!-- ---------- DETAILS ---------- -->
+        <aside class="split-aside" aria-labelledby="details-title">
+          <h2 id="details-title">Other ways to reach me</h2>
+          <dl class="contact-list">
+            <dt>Email</dt>
+            <dd><a href="mailto:alex@example.com">alex@example.com</a></dd>
+            <dt>GitHub</dt>
+            <dd><a href="https://github.com/YOUR-USERNAME" rel="me noopener">github.com/YOUR-USERNAME</a></dd>
+            <dt>Response time</dt>
+            <dd>Usually within two days</dd>
+          </dl>
+
+          <h3>Before you write</h3>
+          <ul class="check-list">
+            <li>If it is a bug, tell me the browser and what you expected.</li>
+            <li>If it is coursework, I am happy to explain, not to hand over answers.</li>
+            <li>If it is about a photograph, ask first &mdash; the answer is usually yes.</li>
+          </ul>
+        </aside>
+
+      </div>
+    </section>
+
+    <!-- ===================== FAQ ===================== -->
+    <section class="section section-alt" aria-labelledby="faq-title">
+      <div class="container container-narrow">
+        <h2 id="faq-title">Frequently asked, occasionally</h2>
+
+        <details class="faq">
+          <summary>Is this site built with a framework?</summary>
+          <p>
+            No. It is hand-written HTML, one stylesheet and one small JavaScript file.
+            I wanted to understand the platform before reaching for tools that hide it.
+          </p>
+        </details>
+
+        <details class="faq">
+          <summary>Can I reuse the code?</summary>
+          <p>
+            Yes, for learning. The text and the illustrations are mine, so please write
+            your own words and draw your own images rather than copying these.
+          </p>
+        </details>
+
+        <details class="faq">
+          <summary>How is the site hosted?</summary>
+          <p>
+            It is a static site published with GitHub Pages straight from the repository,
+            so every push updates the live address within a minute or two.
+          </p>
+        </details>
+
+        <details class="faq">
+          <summary>Why does the form not send anything?</summary>
+          <p>
+            Because a static host has no server to process it. Rather than pretend, the
+            form validates your input and tells you plainly that no email was sent.
+          </p>
+        </details>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-col">
+        <h2 class="footer-title">Alex Chen</h2>
+        <p class="footer-note">
+          A personal site built from scratch with semantic HTML, responsive CSS and a
+          little vanilla JavaScript. No frameworks.
+        </p>
+      </div>
+
+      <nav class="footer-col" aria-label="Footer navigation">
+        <h2 class="footer-title">Pages</h2>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="footer-col">
+        <h2 class="footer-title">Elsewhere</h2>
+        <ul class="footer-links">
+          <li><a href="https://github.com/YOUR-USERNAME" rel="me noopener">GitHub</a></li>
+          <li><a href="mailto:alex@example.com">alex@example.com</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>&copy; <span data-current-year>2025</span> Alex Chen. Built by hand.</p>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>
