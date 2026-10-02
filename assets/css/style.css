@@ -1,0 +1,934 @@
+/* ==========================================================================
+   Alex Chen — personal site
+   style.css  (part 1 of 2: tokens, layout, components)
+   Written by hand. No framework, no reset library, no build step.
+   Part 2 (the responsive layer) is appended at the end of this file.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Design tokens
+   -------------------------------------------------------------------------- */
+:root {
+  --bg:            #f6f7fb;
+  --bg-alt:        #ffffff;
+  --surface:       #ffffff;
+  --surface-2:     #eef1f8;
+  --text:          #14161c;
+  --text-muted:    #5b6273;
+  --border:        #dfe3ed;
+  --accent:        #2f5bff;
+  --accent-soft:   #e8edff;
+  --accent-text:   #ffffff;
+  --shadow-sm:     0 1px 2px rgba(20, 22, 28, .06), 0 4px 12px rgba(20, 22, 28, .05);
+  --shadow-md:     0 8px 28px rgba(20, 22, 28, .10);
+  --radius-sm:     8px;
+  --radius:        14px;
+  --radius-lg:     22px;
+  --space-1:       .35rem;
+  --space-2:       .7rem;
+  --space-3:       1.1rem;
+  --space-4:       1.7rem;
+  --space-5:       2.6rem;
+  --space-6:       4rem;
+  --container:     70rem;
+  --font-body:     "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  --font-mono:     "Cascadia Code", Consolas, "SF Mono", Menlo, monospace;
+  --transition:    180ms ease;
+}
+
+/* Dark theme: applied by JavaScript through html[data-theme="dark"] */
+html[data-theme="dark"] {
+  --bg:            #0d1017;
+  --bg-alt:        #11151d;
+  --surface:       #161b25;
+  --surface-2:     #1d2431;
+  --text:          #e8edf6;
+  --text-muted:    #9aa5b8;
+  --border:        #28303f;
+  --accent:        #7c9bff;
+  --accent-soft:   #1b2439;
+  --accent-text:   #0d1017;
+  --shadow-sm:     0 1px 2px rgba(0, 0, 0, .4);
+  --shadow-md:     0 10px 30px rgba(0, 0, 0, .5);
+}
+
+/* --------------------------------------------------------------------------
+   2. Reset — only what this site actually needs
+   -------------------------------------------------------------------------- */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color var(--transition), color var(--transition);
+}
+
+h1, h2, h3, h4 {
+  line-height: 1.2;
+  margin: 0 0 var(--space-2);
+  text-wrap: balance;
+}
+
+h1 { font-size: 2.25rem; letter-spacing: -.02em; }
+h2 { font-size: 1.6rem; letter-spacing: -.01em; }
+h3 { font-size: 1.15rem; }
+
+p  { margin: 0 0 var(--space-3); }
+ul, ol { margin: 0 0 var(--space-3); }
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: var(--accent);
+  text-decoration-thickness: .08em;
+  text-underline-offset: .18em;
+}
+
+a:hover { text-decoration-thickness: .16em; }
+
+button, input, select, textarea {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* --------------------------------------------------------------------------
+   3. Utilities
+   -------------------------------------------------------------------------- */
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--space-3);
+}
+
+.container-narrow { max-width: 48rem; }
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--space-3);
+  top: -4rem;
+  z-index: 100;
+  padding: var(--space-2) var(--space-3);
+  background-color: var(--accent);
+  color: var(--accent-text);
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+  font-weight: 600;
+  text-decoration: none;
+  transition: top var(--transition);
+}
+
+.skip-link:focus { top: 0; }
+
+.eyebrow {
+  margin: 0 0 var(--space-1);
+  font-size: .8rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.lead {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  max-width: 46ch;
+}
+
+/* --------------------------------------------------------------------------
+   4. Buttons
+   -------------------------------------------------------------------------- */
+.button {
+  display: inline-block;
+  padding: .7rem 1.3rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform var(--transition), background-color var(--transition),
+              border-color var(--transition), color var(--transition),
+              box-shadow var(--transition);
+}
+
+.button-primary {
+  background-color: var(--accent);
+  color: var(--accent-text);
+  box-shadow: var(--shadow-sm);
+}
+
+.button-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.button-ghost {
+  background-color: transparent;
+  color: var(--text);
+  border-color: var(--border);
+}
+
+.button-ghost:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* --------------------------------------------------------------------------
+   5. Site header and navigation
+   -------------------------------------------------------------------------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background-color: color-mix(in srgb, var(--bg-alt) 88%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 4rem;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-right: auto;
+  font-weight: 700;
+  letter-spacing: -.01em;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.brand-mark {
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--radius-sm);
+}
+
+.brand-text { white-space: nowrap; }
+
+.nav-list {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nav-list a {
+  display: block;
+  padding: .45rem .8rem;
+  border-radius: 999px;
+  color: var(--text-muted);
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color var(--transition), color var(--transition);
+}
+
+.nav-list a:hover {
+  background-color: var(--surface-2);
+  color: var(--text);
+}
+
+/* aria-current="page" is set in the HTML, so the active page is also
+   announced to screen readers instead of being colour-only. */
+.nav-list a[aria-current="page"] {
+  background-color: var(--accent-soft);
+  color: var(--accent);
+}
+
+.theme-toggle {
+  display: inline-grid;
+  place-items: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  padding: 0;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: border-color var(--transition), transform var(--transition);
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent);
+  transform: rotate(-15deg);
+}
+
+/* Hamburger button: only meaningful in the mobile layout, so it is hidden
+   here and switched on inside the responsive layer in part 2. */
+.nav-toggle {
+  display: none;
+  padding: 0;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.nav-toggle-box {
+  display: grid;
+  gap: 5px;
+  width: 1.5rem;
+}
+
+.nav-toggle-bar {
+  display: block;
+  height: 2px;
+  background-color: var(--text);
+  border-radius: 2px;
+  transition: transform var(--transition), opacity var(--transition);
+}
+
+/* --------------------------------------------------------------------------
+   6. Hero
+   -------------------------------------------------------------------------- */
+.hero {
+  padding-block: var(--space-6) var(--space-5);
+  background:
+    radial-gradient(60rem 30rem at 85% -10%, var(--accent-soft), transparent 70%),
+    var(--bg);
+}
+
+.hero-inner {
+  display: grid;
+  gap: var(--space-5);
+  align-items: center;
+}
+
+.hero-copy h1 { margin-bottom: var(--space-3); }
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: 0;
+}
+
+.hero-figure { margin: 0; }
+
+.hero-figure img {
+  width: 100%;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.hero-figure figcaption,
+.split-figure figcaption {
+  margin-top: var(--space-2);
+  font-size: .85rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* --------------------------------------------------------------------------
+   7. Generic sections
+   -------------------------------------------------------------------------- */
+.section { padding-block: var(--space-6); }
+
+.section-alt { background-color: var(--bg-alt); }
+
+.section-head {
+  max-width: 44rem;
+  margin-bottom: var(--space-4);
+}
+
+.section-sub {
+  color: var(--text-muted);
+  margin-bottom: 0;
+}
+
+.page-head {
+  padding-block: var(--space-5) var(--space-4);
+  background: linear-gradient(180deg, var(--accent-soft), transparent);
+  border-bottom: 1px solid var(--border);
+}
+
+/* --------------------------------------------------------------------------
+   8. Cards
+   -------------------------------------------------------------------------- */
+.card-grid {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.card {
+  padding: var(--space-4);
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition), box-shadow var(--transition),
+              border-color var(--transition);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--accent);
+}
+
+.card p:last-child { margin-bottom: 0; }
+
+.card-icon {
+  font-size: 1.6rem;
+  line-height: 1;
+  margin-bottom: var(--space-2);
+}
+
+/* --------------------------------------------------------------------------
+   9. Definition list used for the quick facts
+   -------------------------------------------------------------------------- */
+.facts {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0;
+}
+
+.fact {
+  display: grid;
+  gap: .2rem;
+  padding: var(--space-3);
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius-sm);
+}
+
+.fact dt {
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.fact dd {
+  margin: 0;
+  font-weight: 600;
+}
+
+/* --------------------------------------------------------------------------
+   10. Call to action band
+   -------------------------------------------------------------------------- */
+.cta {
+  background: linear-gradient(135deg, var(--accent), #7a4dff);
+  color: #fff;
+}
+
+.cta h2 { color: #fff; }
+
+.cta p {
+  max-width: 46ch;
+  color: rgba(255, 255, 255, .88);
+}
+
+.cta .button-primary {
+  background-color: #fff;
+  color: #1b1f2a;
+}
+
+.cta .button-primary:hover { background-color: #f0f2ff; }
+
+/* --------------------------------------------------------------------------
+   11. Split layout (text beside a figure or an aside)
+   -------------------------------------------------------------------------- */
+.split {
+  display: grid;
+  gap: var(--space-5);
+  align-items: start;
+}
+
+.split-body > :last-child,
+.split-aside > :last-child { margin-bottom: 0; }
+
+.split-figure { margin: 0; }
+
+.split-figure img {
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.split-aside {
+  padding: var(--space-4);
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+}
+
+/* --------------------------------------------------------------------------
+   12. Timeline (about page)
+   -------------------------------------------------------------------------- */
+.timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-3);
+}
+
+.timeline-item {
+  position: relative;
+  padding: var(--space-3) var(--space-3) var(--space-3) var(--space-4);
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+/* The dot on the rail: pure decoration, so it is drawn in CSS. */
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: .85rem;
+  top: 1.6rem;
+  width: .6rem;
+  height: .6rem;
+  background-color: var(--accent);
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+
+.timeline-item h3 { margin-bottom: var(--space-1); }
+.timeline-item p { margin-bottom: 0; color: var(--text-muted); }
+
+/* --------------------------------------------------------------------------
+   13. Skills bars (about page)
+   -------------------------------------------------------------------------- */
+.skills {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-3);
+}
+
+.skill-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  justify-content: space-between;
+  margin-bottom: var(--space-1);
+  font-weight: 600;
+}
+
+.skill-value {
+  font-weight: 500;
+  font-size: .9rem;
+  color: var(--text-muted);
+}
+
+.skill-bar {
+  height: .7rem;
+  background-color: var(--surface-2);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.skill-fill {
+  display: block;
+  height: 100%;
+  width: var(--level, 0%);
+  background: linear-gradient(90deg, var(--accent), #7a4dff);
+  border-radius: inherit;
+  transition: width 900ms cubic-bezier(.2, .8, .2, 1);
+}
+
+
+/* --------------------------------------------------------------------------
+   14. Tag lists
+   -------------------------------------------------------------------------- */
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tag-list li {
+  padding: .2rem .65rem;
+  font-size: .78rem;
+  font-weight: 600;
+  color: var(--accent);
+  background-color: var(--accent-soft);
+  border-radius: 999px;
+}
+
+.tag-list-large li {
+  font-size: .95rem;
+  padding: .45rem 1rem;
+}
+
+/* --------------------------------------------------------------------------
+   15. Project filter and grid
+   -------------------------------------------------------------------------- */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  margin-bottom: var(--space-2);
+}
+
+.filter-button {
+  padding: .45rem 1rem;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color var(--transition), color var(--transition),
+              border-color var(--transition);
+}
+
+.filter-button:hover { border-color: var(--accent); color: var(--accent); }
+
+.filter-button.is-active {
+  background-color: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-text);
+}
+
+.filter-status {
+  font-size: .85rem;
+  color: var(--text-muted);
+  margin-bottom: var(--space-4);
+}
+
+.project-grid {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.project {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.project:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Added by JavaScript while filtering */
+.project.is-hidden { display: none; }
+
+.project-figure {
+  margin: 0;
+  background-color: var(--surface-2);
+}
+
+.project-figure img { width: 100%; }
+
+.project-body {
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  flex: 1;
+}
+
+.project-body p { margin-bottom: 0; color: var(--text-muted); }
+
+.empty-state {
+  padding: var(--space-4);
+  text-align: center;
+  color: var(--text-muted);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+}
+
+/* --------------------------------------------------------------------------
+   16. Contact form
+   -------------------------------------------------------------------------- */
+.contact-form { margin: 0; }
+
+.form-note {
+  padding: var(--space-3);
+  font-size: .9rem;
+  color: var(--text-muted);
+  background-color: var(--surface-2);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius-sm);
+}
+
+.field { margin-bottom: var(--space-3); }
+
+.field label {
+  display: block;
+  margin-bottom: var(--space-1);
+  font-weight: 600;
+}
+
+.field input[type="text"],
+.field input[type="email"],
+.field select,
+.field textarea {
+  width: 100%;
+  padding: .65rem .8rem;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.field textarea { resize: vertical; min-height: 8rem; }
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+  outline: none;
+}
+
+/* Invalid state is added by JavaScript, never by the browser's own
+   :invalid, so that an untouched form does not look broken. */
+.field.has-error input,
+.field.has-error select,
+.field.has-error textarea {
+  border-color: #d64545;
+}
+
+.field.has-error { animation: shake 260ms ease; }
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25%      { transform: translateX(-4px); }
+  75%      { transform: translateX(4px); }
+}
+
+.field-error {
+  margin: var(--space-1) 0 0;
+  font-size: .85rem;
+  font-weight: 600;
+  color: #c93a3a;
+}
+
+html[data-theme="dark"] .field-error { color: #ff8f8f; }
+
+.field-hint {
+  margin: var(--space-1) 0 0;
+  font-size: .82rem;
+  color: var(--text-muted);
+}
+
+.field-check {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-2);
+  align-items: start;
+}
+
+.field-check label {
+  margin-bottom: 0;
+  font-weight: 500;
+}
+
+.field-check .field-error { grid-column: 1 / -1; }
+
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+
+.form-success {
+  padding: var(--space-3);
+  color: #14612f;
+  background-color: #e3f6e9;
+  border: 1px solid #9ddcb2;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+}
+
+html[data-theme="dark"] .form-success {
+  color: #9ff0bb;
+  background-color: #12301d;
+  border-color: #245c37;
+}
+
+/* --------------------------------------------------------------------------
+   17. Contact details and check list
+   -------------------------------------------------------------------------- */
+.contact-list {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-1) var(--space-3);
+  margin: 0 0 var(--space-4);
+}
+
+.contact-list dt {
+  font-weight: 700;
+  font-size: .8rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding-top: .25rem;
+}
+
+.contact-list dd { margin: 0; }
+
+.check-list {
+  margin: 0;
+  padding-left: 1.2rem;
+  color: var(--text-muted);
+}
+
+.check-list li { margin-bottom: var(--space-2); }
+
+/* --------------------------------------------------------------------------
+   18. FAQ (native details/summary — no JavaScript required)
+   -------------------------------------------------------------------------- */
+.faq {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: var(--space-2);
+  overflow: hidden;
+}
+
+.faq summary {
+  padding: var(--space-3) var(--space-4);
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+  transition: background-color var(--transition);
+}
+
+.faq summary::-webkit-details-marker { display: none; }
+
+.faq summary::after {
+  content: "+";
+  font-size: 1.3rem;
+  line-height: 1;
+  color: var(--accent);
+}
+
+.faq[open] summary::after { content: "–"; }
+
+.faq summary:hover { background-color: var(--surface-2); }
+
+.faq p {
+  padding: 0 var(--space-4) var(--space-3);
+  margin: 0;
+  color: var(--text-muted);
+}
+
+/* --------------------------------------------------------------------------
+   19. Footer
+   -------------------------------------------------------------------------- */
+.site-footer {
+  background-color: var(--bg-alt);
+  border-top: 1px solid var(--border);
+  padding-top: var(--space-5);
+}
+
+.footer-inner {
+  display: grid;
+  gap: var(--space-4);
+  padding-bottom: var(--space-4);
+}
+
+.footer-title {
+  font-size: .95rem;
+  font-weight: 700;
+  margin-bottom: var(--space-2);
+}
+
+.footer-note {
+  color: var(--text-muted);
+  font-size: .9rem;
+  max-width: 34ch;
+  margin-bottom: 0;
+}
+
+.footer-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-1);
+}
+
+.footer-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: .92rem;
+}
+
+.footer-links a:hover { color: var(--accent); text-decoration: underline; }
+
+.footer-bottom {
+  padding-block: var(--space-3);
+  border-top: 1px solid var(--border);
+  font-size: .85rem;
+  color: var(--text-muted);
+}
+
+.footer-bottom p { margin: 0; }
+
+/* --------------------------------------------------------------------------
+   20. Scroll reveal — JavaScript adds .is-visible
+   Elements stay fully visible when JavaScript is unavailable.
+   -------------------------------------------------------------------------- */
+.reveal {
+  opacity: 1;
+  transform: none;
+}
+
+html.js .reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 500ms ease, transform 500ms ease;
+}
+
+html.js .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
