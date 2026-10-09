@@ -26,6 +26,18 @@
   <meta property="og:image:alt" content="Alex Chen — personal website">
   <meta name="twitter:card" content="summary_large_image">
 
+  <!-- Set the colour theme before the first paint, so a dark-theme visitor
+       never sees a flash of the light theme. main.js takes over afterwards. -->
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem("alex-site-theme");
+        var dark = saved === "dark" ||
+          (!saved && window.matchMedia("(prefers-color-scheme: dark)").matches);
+        if (dark) { document.documentElement.setAttribute("data-theme", "dark"); }
+      } catch (error) { /* storage blocked: fall back to the light theme */ }
+    })();
+  </script>
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
