@@ -141,3 +141,294 @@
     init();
   }
 })();
+
+/* ==========================================================================
+   Alex Chen — personal site
+   main.js  (part 2 of 2)
+
+   The interactive pieces:
+     4. Contact form validation (with live error messages)
+     5. Project filtering on the projects page
+     6. Scroll reveal and the skill-bar animation
+
+   Like part 1, every one of these checks that its markup exists before doing
+   anything, so the same file can be loaded by all four pages.
+   ========================================================================== */
+
+(function () {
+  "use strict";
+
+  var doc = document;
+
+  /* ==================================================================
+     4. Contact form
+
+     The form has novalidate set in the HTML, which switches off the
+     browser's own bubbles so we can show our errors in the page instead,
+     in the same place for every visitor.
+     ================================================================== */
+
+  var FORM_MESSAGES = {
+    name: {
+      valueMissing: "Please tell me your name.",
+      tooShort: "A name needs at least two characters."
+    },
+    email: {
+      valueMissing: "Please add an email address so I can reply.",
+      typeMismatch: "That does not look like an email address — check for a typo."
+    },
+    subject: {
+      valueMissing: "Please choose a subject."
+    },
+    message: {
+      valueMissing: "Please write a message.",
+      tooShort: "Please write at least 20 characters so I have something to read."
+    },
+    consent: {
+      valueMissing: "Please tick the box so I know you understood."
+    }
+  };
+
+  function fieldOf(control) {
+    return control.closest(".field");
+  }
+
+  function errorBoxOf(form, control) {
+    return form.querySelector('[data-error-for="' + control.name + '"]');
+  }
+
+  function messageFor(control) {
+    var rules = FORM_MESSAGES[control.name] || {};
+    var state = control.validity;
+    if (state.valueMissing) { return rules.valueMissing || "This field is required."; }
+    if (state.typeMismatch) { return rules.typeMismatch || "Please check the format of this field."; }
+    if (state.tooShort) { return rules.tooShort || "This is a little too short."; }
+    return control.validationMessage || "Please check this field.";
+  }
+
+  function markInvalid(form, control, message) {
+    var wrapper = fieldOf(control);
+    var box = errorBoxOf(form, control);
+    if (wrapper) { wrapper.classList.add("has-error"); }
+    control.setAttribute("aria-invalid", "true");
+    if (box) {
+      box.textContent = message;
+      box.hidden = false;
+    }
+  }
+
+  function markValid(form, control) {
+    var wrapper = fieldOf(control);
+    var box = errorBoxOf(form, control);
+    if (wrapper) { wrapper.classList.remove("has-error"); }
+    control.removeAttribute("aria-invalid");
+    if (box) {
+      box.textContent = "";
+      box.hidden = true;
+    }
+  }
+
+  function initContactForm() {
+    var form = doc.querySelector("[data-contact-form]");
+    if (!form) { return; }
+
+    var controls = form.querySelectorAll("input, select, textarea");
+    var success = form.querySelector("[data-form-success]");
+    var counter = form.querySelector("[data-char-count]");
+    var messageField = form.querySelector("#message");
+
+    function validate(control) {
+      if (control.checkValidity()) {
+        markValid(form, control);
+        return true;
+      }
+      markInvalid(form, control, messageFor(control));
+      return false;
+    }
+
+    function clearAll() {
+      Array.prototype.forEach.call(controls, function (control) {
+        markValid(form, control);
+      });
+    }
+
+    Array.prototype.forEach.call(controls, function (control) {
+      var isChoice = control.tagName === "SELECT" || control.type === "checkbox";
+
+      /* Validate when the visitor leaves the field... */
+      control.addEventListener("blur", function () {
+        if (control.value !== "" || control.type === "checkbox") { validate(control); }
+      });
+
+      /* ...and clear the error the moment they fix it, rather than
+         nagging them while they are still typing the first time. */
+      control.addEventListener(isChoice ? "change" : "input", function () {
+        var wrapper = fieldOf(control);
+        if (wrapper && wrapper.classList.contains("has-error")) { validate(control); }
+      });
+    });
+
+    if (messageField && counter) {
+      var updateCount = function () {
+        counter.textContent = String(messageField.value.length);
+      };
+      messageField.addEventListener("input", updateCount);
+      updateCount();
+    }
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      var firstInvalid = null;
+      Array.prototype.forEach.call(controls, function (control) {
+        if (!validate(control) && !firstInvalid) { firstInvalid = control; }
+      });
+
+      if (firstInvalid) {
+        if (success) { success.hidden = true; }
+        firstInvalid.focus();
+        return;
+      }
+
+      /* reset() fires the reset handler below, so the confirmation is shown
+         afterwards — otherwise it would be hidden again immediately. */
+      form.reset();
+      clearAll();
+      if (counter) { counter.textContent = "0"; }
+      if (success) {
+        success.hidden = false;
+        success.scrollIntoView({ block: "nearest", behavior: "smooth" });
+      }
+    });
+
+    form.addEventListener("reset", function () {
+      clearAll();
+      if (success) { success.hidden = true; }
+      if (counter) { counter.textContent = "0"; }
+    });
+  }
+
+  /* ==================================================================
+     5. Project filter
+     ================================================================== */
+  function initProjectFilter() {
+    var grid = doc.querySelector("[data-project-grid]");
+    if (!grid) { return; }
+
+    var buttons = doc.querySelectorAll(".filter-button");
+    var items = grid.querySelectorAll(".project");
+    var status = doc.querySelector("[data-filter-status]");
+    var empty = doc.querySelector("[data-empty-state]");
+
+    function applyFilter(filter) {
+      var shown = 0;
+
+      Array.prototype.forEach.call(items, function (item) {
+        var tags = (item.getAttribute("data-tags") || "").split(/\s+/);
+        var matches = filter === "all" || tags.indexOf(filter) !== -1;
+        item.classList.toggle("is-hidden", !matches);
+        if (matches) { shown += 1; }
+      });
+
+      if (status) {
+        status.textContent = filter === "all"
+          ? "Showing all " + shown + " projects."
+          : "Showing " + shown + " project" + (shown === 1 ? "" : "s") +
+            " tagged \u201C" + filter + "\u201D.";
+      }
+
+      if (empty) { empty.hidden = shown !== 0; }
+    }
+
+    Array.prototype.forEach.call(buttons, function (button) {
+      button.addEventListener("click", function () {
+        Array.prototype.forEach.call(buttons, function (other) {
+          var active = other === button;
+          other.classList.toggle("is-active", active);
+          other.setAttribute("aria-pressed", active ? "true" : "false");
+        });
+        applyFilter(button.getAttribute("data-filter"));
+      });
+    });
+
+    /* Fade the cards in on first paint so the page does not simply appear. */
+    applyFilter("all");
+  }
+
+  /* ==================================================================
+     6a. Scroll reveal
+     Elements fade up as they enter the viewport. The .reveal class is
+     added here rather than in the HTML, so if this file never loads the
+     content is visible instead of stuck at opacity 0.
+     ================================================================== */
+  function initScrollReveal() {
+    if (!("IntersectionObserver" in window)) { return; }
+
+    var nodes = doc.querySelectorAll(
+      ".card, .timeline-item, .project, .facts, .skills, .split-figure, .cta-inner"
+    );
+    if (!nodes.length) { return; }
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+
+    Array.prototype.forEach.call(nodes, function (node, index) {
+      node.classList.add("reveal");
+      /* A small stagger, capped at three steps, so a grid does not pulse. */
+      node.style.transitionDelay = (Math.min(index, 6) % 4) * 70 + "ms";
+      observer.observe(node);
+    });
+  }
+
+  /* ==================================================================
+     6b. Skill bars
+     ================================================================== */
+  function initSkillBars() {
+    var bars = doc.querySelectorAll(".skill-fill");
+    if (!bars.length) { return; }
+
+    function measure(bar) {
+      bar.classList.add("is-measured");
+    }
+
+    if (!("IntersectionObserver" in window)) {
+      Array.prototype.forEach.call(bars, measure);
+      return;
+    }
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          measure(entry.target);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.4 });
+
+    Array.prototype.forEach.call(bars, function (bar) {
+      observer.observe(bar);
+    });
+  }
+
+  /* ==================================================================
+     Boot
+     ================================================================== */
+  function init() {
+    initContactForm();
+    initProjectFilter();
+    initScrollReveal();
+    initSkillBars();
+  }
+
+  if (doc.readyState === "loading") {
+    doc.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+})();
