@@ -1,0 +1,403 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<title>My Favorite Quotes</title>
+<link rel="icon" href="dog.png" sizes="32x32">
+<link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+     <header id="site-header">
+  <!-- the nav used to be here. Now it is empty. -->
+</header>
+
+    <section class="quote-hero" id="quoteHero">
+        <div class="hero-stats">
+            <span class="hero-stat-num" id="heroCount">0</span>
+            <span class="hero-stat-label">Quotes Collection</span>
+        </div>
+        <span class="hero-big-quote">"</span>
+        <blockquote>
+            <p id="heroQuoteText">Loading...</p>
+        </blockquote>
+        <footer>
+            <cite id="heroQuoteCite"></cite>
+        </footer>
+        <button class="quote-hero-btn" id="shuffleBtn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+            Shuffle
+        </button>
+        <div class="hero-progress" id="heroProgress"></div>
+    </section>
+
+    <div class="main">
+        <h1>My Favorite Quotes</h1>
+
+        <div class="quote-filters">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="principle">Principles</button>
+            <button class="filter-btn" data-filter="code">Code</button>
+            <button class="filter-btn" data-filter="wisdom">Wisdom</button>
+            <button class="filter-btn" data-filter="debug">Debug</button>
+            <button class="filter-btn" data-filter="craft">Craft</button>
+        </div>
+
+        <div class="quote-container">
+            
+            <article class="quote" data-category="principle">
+                <span class="quote-category">principle</span>
+                <button class="quote-copy" aria-label="Copy quote">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                    <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </button>
+                <blockquote>
+                    <p>DRY: Don't Repeat Yourself.</p>
+                </blockquote>
+                <footer>
+                    <cite>Andrew Hunt</cite>, <span class="source">The Pragmatic Programmer</span>
+                </footer>
+            </article>
+
+            
+            <article class="quote" data-category="principle">
+                <span class="quote-category">principle</span>
+                <button class="quote-copy" aria-label="Copy quote">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                    <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </button>
+                <blockquote>
+                    <p>KISS: Keep It Simple, Stupid.</p>
+                </blockquote>
+                <footer>
+                    <cite>Kelly Johnson</cite>, <span class="source">Aerospace design principle</span>
+                </footer>
+            </article>
+
+          
+            <article class="quote" data-category="principle">
+                <span class="quote-category">principle</span>
+                <button class="quote-copy" aria-label="Copy quote">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                    <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </button>
+                <blockquote>
+                    <p>YAGNI: You Aren't Gonna Need It.</p>
+                </blockquote>
+                <footer>
+                    <cite>Ron Jeffries</cite>, <span class="source">Agile Programming</span>
+                </footer>
+            </article>
+
+           
+            <article class="quote" data-category="wisdom">
+                <span class="quote-category">wisdom</span>
+                <button class="quote-copy" aria-label="Copy quote">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                    <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </button>
+                <blockquote>
+                    <p>Talk is cheap. Show me the code.</p>
+                </blockquote>
+                <footer>
+                    <cite>Linus Torvalds</cite>, <span class="source">Linux mailing list</span>
+                </footer>
+            </article>
+
+            
+            <article class="quote" data-category="wisdom">
+                <span class="quote-category">wisdom</span>
+                <button class="quote-copy" aria-label="Copy quote">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                    <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </button>
+                <blockquote>
+                    <p>Premature optimization is the root of all evil.</p>
+                </blockquote>
+                <footer>
+                    <cite>Donald Knuth</cite>, <span class="source">Computer programming paper</span>
+                </footer>
+            </article>
+
+           
+            <article class="quote" data-category="craft">
+                <span class="quote-category">craft</span>
+                <button class="quote-copy" aria-label="Copy quote">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                    <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </button>
+                <blockquote>
+                    <p>Good code is written for humans to read.</p>
+                </blockquote>
+                <footer>
+                    <cite>Hal Abelson</cite>, <span class="source">SICP book</span>
+                </footer>
+            </article>
+
+            <article class="quote" data-category="code">
+                <span class="quote-category">code</span>
+                <button class="quote-copy" aria-label="Copy quote">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                    <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </button>
+                <blockquote>
+                    <p>First, solve the problem. Then, write the code.</p>
+                </blockquote>
+                <footer>
+                    <cite>John Johnson</cite>
+                </footer>
+            </article>
+
+            <article class="quote" data-category="principle">
+                <span class="quote-category">principle</span>
+                <button class="quote-copy" aria-label="Copy quote">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                    <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </button>
+                <blockquote>
+                    <p>Simplicity is the soul of efficiency.</p>
+                </blockquote>
+                <footer>
+                    <cite>Austin Freeman</cite>, <span class="source">The Eye of Osiris</span>
+                </footer>
+            </article>
+
+            <article class="quote" data-category="wisdom">
+                <span class="quote-category">wisdom</span>
+                <button class="quote-copy" aria-label="Copy quote">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                    <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </button>
+                <blockquote>
+                    <p>The best way to predict the future is to invent it.</p>
+                </blockquote>
+                <footer>
+                    <cite>Alan Kay</cite>, <span class="source">Xerox PARC</span>
+                </footer>
+            </article>
+
+            <article class="quote" data-category="craft">
+                <span class="quote-category">craft</span>
+                <button class="quote-copy" aria-label="Copy quote">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                    <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </button>
+                <blockquote>
+                    <p>Any fool can write code that a computer can understand. Good programmers write code that humans can understand.</p>
+                </blockquote>
+                <footer>
+                    <cite>Martin Fowler</cite>, <span class="source">Refactoring</span>
+                </footer>
+            </article>
+
+            <article class="quote" data-category="code">
+                <span class="quote-category">code</span>
+                <button class="quote-copy" aria-label="Copy quote">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                    <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </button>
+                <blockquote>
+                    <p>The only way to go fast is to go well.</p>
+                </blockquote>
+                <footer>
+                    <cite>Robert C. Martin</cite>, <span class="source">Clean Code</span>
+                </footer>
+            </article>
+
+            <article class="quote" data-category="debug">
+                <span class="quote-category">debug</span>
+                <button class="quote-copy" aria-label="Copy quote">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                    <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </button>
+                <blockquote>
+                    <p>Debugging is being the detective in a crime movie where you are also the murderer.</p>
+                </blockquote>
+                <footer>
+                    <cite>Filipe Fortes</cite>
+                </footer>
+            </article>
+        </div>
+
+        <div class="toast" id="toast"></div>
+
+        <p>Back to <a href="index.html">home page</a></p>
+    </div>
+    <footer class="site-footer">
+        <p>&copy; 2026 My Project Ideas</p>
+    </footer>
+    <script src="nav.js"></script>
+    <script>
+        (function(){
+            var quotes=[];
+            var lastIdx=-1;
+            var heroText=document.getElementById('heroQuoteText');
+            var heroCite=document.getElementById('heroQuoteCite');
+            var shuffleBtn=document.getElementById('shuffleBtn');
+            var heroCount=document.getElementById('heroCount');
+            var heroProgress=document.getElementById('heroProgress');
+
+            document.querySelectorAll('.quote').forEach(function(q){
+                var p=q.querySelector('blockquote p');
+                var c=q.querySelector('cite');
+                var s=q.querySelector('.source');
+                if(p){
+                    quotes.push({
+                        text:p.textContent,
+                        cite:c?c.textContent:'',
+                        source:s?s.textContent:''
+                    });
+                }
+            });
+
+            if(heroCount){
+                var n=quotes.length;
+                var step=0;
+                var timer=setInterval(function(){
+                    step++;
+                    heroCount.textContent=step;
+                    if(step>=n) clearInterval(timer);
+                },60);
+            }
+
+            function pickRandom(){
+                var idx;
+                do{idx=Math.floor(Math.random()*quotes.length);}
+                while(idx===lastIdx && quotes.length>1);
+                lastIdx=idx;
+                return quotes[idx];
+            }
+
+            function showQuote(){
+                var q=pickRandom();
+                heroText.style.opacity='0';
+                heroText.style.transform='translateY(8px)';
+                setTimeout(function(){
+                    heroText.textContent=q.text;
+                    heroCite.textContent='';
+                    var citeText=q.cite;
+                    var commaIdx=citeText.indexOf(',');
+                    if(commaIdx>-1){
+                        heroCite.appendChild(document.createTextNode(citeText.substring(0,commaIdx)));
+                        var src=document.createElement('span');
+                        src.className='source';
+                        src.textContent=citeText.substring(commaIdx);
+                        heroCite.appendChild(src);
+                    }else{
+                        heroCite.textContent=citeText;
+                    }
+                    heroText.style.opacity='1';
+                    heroText.style.transform='translateY(0)';
+                },180);
+            }
+
+            var carouselTimer=null;
+            var PROGRESS_MS=4500;
+
+            function resetProgress(){
+                if(heroProgress){
+                    heroProgress.style.transition='none';
+                    heroProgress.style.width='0';
+                    void heroProgress.offsetWidth;
+                    heroProgress.style.transition='width '+PROGRESS_MS+'ms linear';
+                    heroProgress.style.width='100%';
+                }
+            }
+
+            function startCarousel(){
+                stopCarousel();
+                resetProgress();
+                carouselTimer=setInterval(function(){
+                    showQuote();
+                    resetProgress();
+                },PROGRESS_MS);
+            }
+            function stopCarousel(){
+                if(carouselTimer){clearInterval(carouselTimer);carouselTimer=null;}
+            }
+
+            if(quotes.length){
+                showQuote();
+                startCarousel();
+
+                shuffleBtn.addEventListener('click',function(){
+                    this.classList.add('spin');
+                    showQuote();
+                    startCarousel();
+                    setTimeout(function(){shuffleBtn.classList.remove('spin');},400);
+                });
+
+                var heroSection=document.getElementById('quoteHero');
+                heroSection.addEventListener('mouseenter',stopCarousel);
+                heroSection.addEventListener('mouseleave',startCarousel);
+            }
+
+            var filterBtns=document.querySelectorAll('.filter-btn');
+            var quoteCards=Array.prototype.slice.call(document.querySelectorAll('.quote'));
+            var filterBusy=false;
+            filterBtns.forEach(function(btn){
+                btn.addEventListener('click',function(){
+                    if(filterBusy) return;
+                    filterBusy=true;
+                    filterBtns.forEach(function(b){b.classList.remove('active');});
+                    btn.classList.add('active');
+                    var f=btn.getAttribute('data-filter');
+
+                    var anyVisible=quoteCards.some(function(c){return c.classList.contains('show');});
+
+                    function applyFilter(){
+                        quoteCards.forEach(function(card){
+                            var cat=card.getAttribute('data-category');
+                            card.style.display=(f==='all' || cat===f) ? '' : 'none';
+                        });
+                        requestAnimationFrame(function(){
+                            quoteCards.forEach(function(card){
+                                if(card.style.display!=='none'){
+                                    card.classList.add('show');
+                                }
+                            });
+                            setTimeout(function(){filterBusy=false;},260);
+                        });
+                    }
+
+                    if(anyVisible){
+                        quoteCards.forEach(function(c){c.classList.remove('show');});
+                        setTimeout(applyFilter,240);
+                    }else{
+                        applyFilter();
+                    }
+                });
+            });
+            quoteCards.forEach(function(c){c.classList.add('show');});
+
+            var toast=document.getElementById('toast');
+            function showToast(msg){
+                toast.textContent=msg;
+                toast.classList.add('show');
+                setTimeout(function(){toast.classList.remove('show');},1800);
+            }
+
+            document.querySelectorAll('.quote-copy').forEach(function(btn){
+                btn.addEventListener('click',function(){
+                    var card=btn.closest('.quote');
+                    var text=card.querySelector('blockquote p').textContent;
+                    var cite=card.querySelector('cite').textContent;
+                    var full='"'+text+'" — '+cite;
+                    if(navigator.clipboard){
+                        navigator.clipboard.writeText(full).then(function(){
+                            btn.classList.add('copied');
+                            showToast('Copied to clipboard!');
+                            setTimeout(function(){btn.classList.remove('copied');},1400);
+                        });
+                    }else{
+                        var ta=document.createElement('textarea');
+                        ta.value=full;document.body.appendChild(ta);ta.select();
+                        document.execCommand('copy');document.body.removeChild(ta);
+                        btn.classList.add('copied');
+                        showToast('Copied to clipboard!');
+                        setTimeout(function(){btn.classList.remove('copied');},1400);
+                    }
+                });
+            });
+        })();
+    </script>
+</body>
+</html>

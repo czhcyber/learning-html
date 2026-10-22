@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Card Game — Cui Zhongheng</title>
+  <meta name="description" content="A browser-based two-player card duel game built with vanilla JavaScript.">
+
+  <link rel="canonical" href="https://YOUR-USERNAME.github.io/personal-site/card-game.html">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/img/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+  <meta name="theme-color" content="#2f6bff">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Cui Zhongheng">
+  <meta property="og:title" content="Card Game — Cui Zhongheng">
+  <meta property="og:description" content="A browser-based two-player card duel game.">
+  <meta property="og:url" content="https://YOUR-USERNAME.github.io/personal-site/card-game.html">
+  <meta property="og:image" content="https://YOUR-USERNAME.github.io/personal-site/assets/img/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Cui Zhongheng — card game">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem("alex-site-theme");
+        var dark = saved === "dark" ||
+          (!saved && window.matchMedia("(prefers-color-scheme: dark)").matches);
+        if (dark) { document.documentElement.setAttribute("data-theme", "dark"); }
+      } catch (error) { }
+    })();
+  </script>
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <style>
+    /* ==================================================================
+       Card game specific styles
+       These extend the existing design system with game-specific layout
+       and visual effects, using the same CSS variables and conventions.
+       ================================================================== */
+
+    .game-container {
+      max-width: 52rem;
+      margin: 0 auto;
+      padding-block: var(--space-4);
+    }
+
+    .game-header-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-3);
+      margin-bottom: var(--space-4);
+    }
+
+    .game-header-bar .button {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-1);
+    }
+
+    .game-round-label {
+      margin: 0;
+      font-size: .85rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* ---------- Scoreboard ---------- */
+    .scoreboard {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-3);
+      margin-bottom: var(--space-4);
+      padding: var(--space-3);
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+      flex-wrap: wrap;
+    }
+
+    .score-player {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-1);
+      min-width: 7rem;
+    }
+
+    .score-player.is-active .score-name {
+      color: var(--accent);
+    }
+
+    .score-name {
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin: 0;
+    }
+
+    .score-value {
+      font-size: 2rem;
+      font-weight: 800;
+      line-height: 1;
+      color: var(--text);
+      margin: 0;
+    }
+
+    .score-divider {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      user-select: none;
+    }
+
+    /* ---------- Deck ---------- */
+    .deck-area {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+      margin-bottom: var(--space-4);
+      padding: var(--space-2);
+    }
+
+    .deck-count {
+      font-size: .82rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .deck-button {
+      position: relative;
+      width: 4.2rem;
+      height: 5.8rem;
+      background-color: var(--accent);
+      border: 2px solid var(--accent);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: transform var(--transition), box-shadow var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      color: var(--accent-text);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .deck-button:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .deck-button:active {
+      transform: translateY(-1px);
+    }
+
+    .deck-button.is-empty {
+      background-color: var(--surface-2);
+      border-color: var(--border);
+      color: var(--text-muted);
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .deck-button.is-disabled {
+      pointer-events: none;
+      opacity: .5;
+    }
+
+    /* ---------- Battlefield ---------- */
+    .battlefield {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-5);
+      min-height: 8rem;
+      padding: var(--space-4);
+      margin-bottom: var(--space-4);
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+      position: relative;
+    }
+
+    .battlefield-spot {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-2);
+      min-width: 5rem;
+      min-height: 7rem;
+      justify-content: center;
+    }
+
+    .battlefield-label {
+      font-size: .78rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+
+    .battlefield-vs {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--accent);
+      user-select: none;
+    }
+
+    .card-placeholder {
+      font-size: .85rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    .card-placeholder.hidden {
+      display: none;
+    }
+
+    /* ---------- Playing card ---------- */
+    .playing-card {
+      width: 4.2rem;
+      height: 5.8rem;
+      background-color: #ffffff;
+      border: 2px solid var(--border);
+      border-radius: var(--radius-sm);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: .15rem;
+      box-shadow: var(--shadow-sm);
+      transition: transform var(--transition), box-shadow var(--transition);
+      user-select: none;
+      position: relative;
+    }
+
+    .playing-card.is-red {
+      color: #c0392b;
+      border-color: #e0c0c0;
+    }
+
+    .playing-card.is-black {
+      color: #1a1a2e;
+      border-color: #c8ccd6;
+    }
+
+    .playing-card.is-small {
+      width: 3.4rem;
+      height: 4.6rem;
+      font-size: .7rem;
+    }
+
+    .card-value {
+      font-size: 1.3rem;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .card-suit {
+      font-size: 1.5rem;
+      line-height: 1;
+    }
+
+    .playing-card.is-small .card-value {
+      font-size: 1rem;
+    }
+
+    .playing-card.is-small .card-suit {
+      font-size: 1.1rem;
+    }
+
+    .playing-card.is-playable {
+      cursor: pointer;
+    }
+
+    .playing-card.is-playable:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--accent);
+      z-index: 5;
+    }
+
+    .playing-card.is-playable:active {
+      transform: translateY(-3px);
+    }
+
+    .playing-card.is-just-played {
+      animation: cardSlideIn 0.35s ease-out;
+    }
+
+    .playing-card.is-winner {
+      animation: cardWin 0.5s ease-out;
+      border-color: #f1c40f;
+      box-shadow: 0 0 0 3px rgba(241, 196, 15, .4);
+    }
+
+    @keyframes cardSlideIn {
+      from {
+        transform: scale(.5) translateY(-40px);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes cardWin {
+      0%   { transform: scale(1); }
+      40%  { transform: scale(1.15); }
+      100% { transform: scale(1); }
+    }
+
+    /* ---------- Hands ---------- */
+    .hand-section {
+      margin-bottom: var(--space-3);
+    }
+
+    .hand-label {
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: var(--space-2);
+    }
+
+    .hand-label.is-active-label {
+      color: var(--accent);
+    }
+
+    .hand-cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      padding: var(--space-2);
+      min-height: 5rem;
+      background-color: var(--surface-2);
+      border: 1px dashed var(--border);
+      border-radius: var(--radius);
+      align-items: center;
+    }
+
+    .hand-cards:empty::after {
+      content: "No cards left";
+      color: var(--text-muted);
+      font-size: .85rem;
+      font-style: italic;
+      padding: var(--space-2);
+    }
+
+    .hand-cards .playing-card {
+      animation: cardSlideIn .3s ease-out;
+    }
+
+    /* ---------- Message area ---------- */
+    .game-message {
+      text-align: center;
+      padding: var(--space-3);
+      margin-top: var(--space-3);
+      font-weight: 600;
+      font-size: .95rem;
+      border-radius: var(--radius-sm);
+      transition: opacity var(--transition);
+    }
+
+    .game-message.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .game-message.is-info {
+      background-color: var(--accent-soft);
+      color: var(--accent);
+    }
+
+    .game-message.is-win {
+      background-color: #e3f6e9;
+      color: #14612f;
+    }
+
+    html[data-theme="dark"] .game-message.is-win {
+      background-color: #12301d;
+      color: #9ff0bb;
+    }
+
+    .game-message.is-draw {
+      background-color: var(--surface-2);
+      color: var(--text-muted);
+    }
+
+    /* ---------- Game over overlay ---------- */
+    .game-over-panel {
+      display: none;
+      text-align: center;
+      padding: var(--space-5);
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-md);
+      margin-top: var(--space-4);
+      animation: fadeIn .35s ease;
+    }
+
+    .game-over-panel.is-visible {
+      display: block;
+    }
+
+    .game-over-panel h3 {
+      font-size: 1.4rem;
+      margin-bottom: var(--space-2);
+    }
+
+    .game-over-panel p {
+      color: var(--text-muted);
+      margin-bottom: var(--space-3);
+    }
+
+    .game-over-panel .winner-highlight {
+      color: var(--accent);
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ---------- Rules panel ---------- */
+    .rules-details {
+      margin-top: var(--space-5);
+      padding: var(--space-3);
+      background-color: var(--surface-2);
+      border-radius: var(--radius);
+      font-size: .9rem;
+      color: var(--text-muted);
+    }
+
+    .rules-details summary {
+      font-weight: 700;
+      cursor: pointer;
+      color: var(--text);
+      padding: var(--space-1) 0;
+    }
+
+    .rules-details ol {
+      margin-top: var(--space-2);
+      padding-left: 1.3rem;
+    }
+
+    .rules-details li {
+      margin-bottom: var(--space-1);
+    }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 600px) {
+      .battlefield {
+        gap: var(--space-2);
+        padding: var(--space-2);
+      }
+
+      .playing-card {
+        width: 3.4rem;
+        height: 4.6rem;
+      }
+
+      .playing-card .card-value {
+        font-size: 1rem;
+      }
+
+      .playing-card .card-suit {
+        font-size: 1.1rem;
+      }
+
+      .deck-button {
+        width: 3.4rem;
+        height: 4.6rem;
+      }
+
+      .score-value {
+        font-size: 1.5rem;
+      }
+
+      .battlefield-spot {
+        min-width: 3.5rem;
+        min-height: 5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">
+        <img class="brand-mark" src="assets/img/favicon.svg" alt="" width="32" height="32">
+        <span class="brand-text">Cui&nbsp;Zhongheng</span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span class="nav-toggle-box" aria-hidden="true">
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+        </span>
+        <span class="visually-hidden">Menu</span>
+      </button>
+
+      <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+        <ul class="nav-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">Quote</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html">Now</a></li>
+        </ul>
+      </nav>
+
+      <button class="theme-toggle" type="button" aria-pressed="false">
+        <span class="theme-toggle-icon" aria-hidden="true">🌙</span>
+        <span class="visually-hidden">Switch colour theme</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <section class="page-head" aria-labelledby="page-title">
+      <div class="container">
+        <p class="eyebrow">Projects · Card Game</p>
+        <h1 id="page-title">Card Duel</h1>
+        <p class="lead">
+          A two-player card battle game. Draw from a shared deck, play your best
+          card each turn, and try to win more rounds than your opponent.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="game-title">
+      <div class="container game-container">
+
+        <div class="game-header-bar">
+          <p id="game-title" class="game-round-label" data-game-status>Waiting to start…</p>
+          <button class="button button-primary" type="button" data-new-game>
+            <span aria-hidden="true">🔄</span> New Game
+          </button>
+        </div>
+
+        <div class="scoreboard">
+          <div class="score-player" id="player1-score-box" data-player-score="1">
+            <p class="score-name">Player 1 (You)</p>
+            <p class="score-value" data-score="1">0</p>
+          </div>
+          <span class="score-divider" aria-hidden="true">vs</span>
+          <div class="score-player" id="player2-score-box" data-player-score="2">
+            <p class="score-name">Player 2 (AI)</p>
+            <p class="score-value" data-score="2">0</p>
+          </div>
+        </div>
+
+        <div class="deck-area">
+          <button class="deck-button" type="button" data-deck-draw aria-label="Draw a card from the deck">
+            <span data-deck-count>40</span>
+          </button>
+          <span class="deck-count">cards in deck</span>
+        </div>
+
+        <div class="battlefield">
+          <div class="battlefield-spot" data-battle="1">
+            <span class="battlefield-label">You played</span>
+            <span class="card-placeholder" data-spot-placeholder="1">—</span>
+            <div data-spot-card="1"></div>
+          </div>
+          <span class="battlefield-vs" aria-hidden="true">vs</span>
+          <div class="battlefield-spot" data-battle="2">
+            <span class="battlefield-label">AI played</span>
+            <span class="card-placeholder" data-spot-placeholder="2">—</span>
+            <div data-spot-card="2"></div>
+          </div>
+        </div>
+
+        <div class="hand-section">
+          <p class="hand-label is-active-label" data-hand-label>
+            Your hand &mdash; click a card to play it
+          </p>
+          <div class="hand-cards" data-hand="1"></div>
+        </div>
+
+        <div class="hand-section">
+          <p class="hand-label">AI's hand</p>
+          <div class="hand-cards" data-hand="2"></div>
+        </div>
+
+        <div class="game-message hidden" data-game-message></div>
+
+        <div class="game-over-panel" data-game-over>
+          <h3 data-game-over-title>Game Over!</h3>
+          <p data-game-over-text></p>
+          <button class="button button-primary" type="button" data-new-game>
+            Play again
+          </button>
+        </div>
+
+        <details class="rules-details">
+          <summary>How to play</summary>
+          <ol>
+            <li>The deck starts with 40 cards (1–10 across four suits: ♠ ♥ ♦ ♣).</li>
+            <li>Each player is dealt 5 cards. You play as Player 1, and the computer plays as Player 2.</li>
+            <li>On your turn, click the deck to draw a card, then click one of your cards to play it onto the battlefield.</li>
+            <li>The AI will then play its own card automatically.</li>
+            <li>The higher card value wins the round. Suits break ties: ♠ &gt; ♥ &gt; ♦ &gt; ♣.</li>
+            <li>After both cards are played, the winner is shown and players draw back up if the deck still has cards.</li>
+            <li>The game ends when the deck is empty and both players have no cards left. The player with more round wins is the champion!</li>
+          </ol>
+        </details>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-col">
+        <h2 class="footer-title">Cui Zhongheng</h2>
+        <p class="footer-note">
+          A personal site built from scratch with semantic HTML, responsive CSS and a
+          little vanilla JavaScript. No frameworks.
+        </p>
+      </div>
+
+      <nav class="footer-col" aria-label="Footer navigation">
+        <h2 class="footer-title">Pages</h2>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">Quote</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html">Now</a></li>
+          <li><a href="card-game.html">Card Game</a></li>
+        </ul>
+      </nav>
+
+      <div class="footer-col">
+        <h2 class="footer-title">Elsewhere</h2>
+        <ul class="footer-links">
+          <li><a href="https://github.com/YOUR-USERNAME" rel="me noopener">GitHub</a></li>
+          <li><a href="mailto:alex@example.com">alex@example.com</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>&copy; <span data-current-year>2025</span> Cui Zhongheng. Built by hand.</p>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js" defer></script>
+
+  <script>
+    (function () {
+      "use strict";
+
+      var doc = document;
+
+      /* ================================================================
+         Card Duel — game state and logic
+         ================================================================ */
+
+      var SUITS = [
+        { symbol: "\u2660", name: "spades",   color: "black", rank: 4 },
+        { symbol: "\u2665", name: "hearts",   color: "red",   rank: 3 },
+        { symbol: "\u2666", name: "diamonds", color: "red",   rank: 2 },
+        { symbol: "\u2663", name: "clubs",    color: "black", rank: 1 }
+      ];
+
+      var VALUES = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+      function buildDeck() {
+        var deck = [];
+        SUITS.forEach(function (suit) {
+          VALUES.forEach(function (value) {
+            deck.push({
+              value: value,
+              suit: suit.symbol,
+              color: suit.color,
+              suitRank: suit.rank
+            });
+          });
+        });
+        return deck;
+      }
+
+      function shuffle(array) {
+        var a = array.slice();
+        var i, j, temp;
+        for (i = a.length - 1; i > 0; i--) {
+          j = Math.floor(Math.random() * (i + 1));
+          temp = a[i];
+          a[i] = a[j];
+          a[j] = temp;
+        }
+        return a;
+      }
+
+      function compareCards(cardA, cardB) {
+        if (cardA.value !== cardB.value) {
+          return cardA.value > cardB.value ? 1 : -1;
+        }
+        if (cardA.suitRank !== cardB.suitRank) {
+          return cardA.suitRank > cardB.suitRank ? 1 : -1;
+        }
+        return 0;
+      }
+
+      /* ================================================================
+         Game state
+         ================================================================ */
+
+      var state = {
+        deck: [],
+        hands: [[], []],
+        battlefield: [null, null],
+        scores: [0, 0],
+        currentPlayer: 0,
+        phase: "idle",
+        roundInProgress: false,
+        gameOver: false
+      };
+
+      /* ================================================================
+         DOM references
+         ================================================================ */
+
+      function $(selector, parent) {
+        return (parent || doc).querySelector(selector);
+      }
+
+      function $$(selector, parent) {
+        return (parent || doc).querySelectorAll(selector);
+      }
+
+      var dom = {
+        get deckBtn()     { return $("[data-deck-draw]"); },
+        get deckCount()   { return $("[data-deck-count]"); },
+        get gameStatus()  { return $("[data-game-status]"); },
+        get gameMessage() { return $("[data-game-message]"); },
+        get gameOverPanel() { return $("[data-game-over]"); },
+        get gameOverTitle() { return $("[data-game-over-title]"); },
+        get gameOverText()  { return $("[data-game-over-text]"); },
+        get handLabel()   { return $("[data-hand-label]"); },
+        get newGameButtons() { return $$("[data-new-game]"); }
+      };
+
+      function handEl(player) {
+        return $('[data-hand="' + (player + 1) + '"]');
+      }
+
+      function spotCardEl(player) {
+        return $('[data-spot-card="' + (player + 1) + '"]');
+      }
+
+      function spotPlaceholderEl(player) {
+        return $('[data-spot-placeholder="' + (player + 1) + '"]');
+      }
+
+      function scoreEl(player) {
+        return $('[data-score="' + (player + 1) + '"]');
+      }
+
+      function scoreBoxEl(player) {
+        return $('[data-player-score="' + (player + 1) + '"]');
+      }
+
+      /* ================================================================
+         Rendering
+         ================================================================ */
+
+      function cardHTML(card, playable) {
+        if (!card) { return ""; }
+        var classes = "playing-card is-" + card.color;
+        if (playable) { classes += " is-playable"; }
+        return '<div class="' + classes + '" data-card-value="' + card.value +
+               '" data-card-suit="' + card.suit + '">' +
+               '<span class="card-value">' + card.value + '</span>' +
+               '<span class="card-suit">' + card.suit + '</span>' +
+               '</div>';
+      }
+
+      function renderHand(player) {
+        var el = handEl(player);
+        var html = "";
+        state.hands[player].forEach(function (card) {
+          html += cardHTML(card, player === 0 && state.phase === "play" && !state.roundInProgress);
+        });
+        el.innerHTML = html;
+      }
+
+      function renderDeck() {
+        dom.deckCount.textContent = String(state.deck.length);
+        if (state.deck.length === 0) {
+          dom.deckBtn.classList.add("is-empty");
+        } else {
+          dom.deckBtn.classList.remove("is-empty");
+        }
+        if (state.phase !== "draw" || state.roundInProgress || state.gameOver) {
+          dom.deckBtn.classList.add("is-disabled");
+        } else {
+          dom.deckBtn.classList.remove("is-disabled");
+        }
+      }
+
+      function renderBattlefield() {
+        for (var p = 0; p < 2; p++) {
+          var card = state.battlefield[p];
+          var spotEl = spotCardEl(p);
+          var placeholder = spotPlaceholderEl(p);
+          if (card) {
+            spotEl.innerHTML = cardHTML(card, false);
+            var rendered = spotEl.querySelector(".playing-card");
+            if (rendered) { rendered.classList.add("is-just-played"); }
+            if (placeholder) { placeholder.classList.add("hidden"); }
+          } else {
+            spotEl.innerHTML = "";
+            if (placeholder) { placeholder.classList.remove("hidden"); }
+          }
+        }
+      }
+
+      function renderScores() {
+        for (var p = 0; p < 2; p++) {
+          scoreEl(p).textContent = String(state.scores[p]);
+        }
+      }
+
+      function renderActivePlayer() {
+        var box1 = scoreBoxEl(0);
+        var box2 = scoreBoxEl(1);
+        if (box1) { box1.classList.toggle("is-active", state.currentPlayer === 0); }
+        if (box2) { box2.classList.toggle("is-active", state.currentPlayer === 1); }
+      }
+
+      function renderStatus() {
+        if (state.gameOver) {
+          var winner = state.scores[0] > state.scores[1] ? "Player 1 (You)" :
+                       state.scores[1] > state.scores[0] ? "Player 2 (AI)" : null;
+          dom.gameStatus.textContent = winner ? (winner + " wins!") : "It's a tie!";
+        } else if (state.roundInProgress) {
+          dom.gameStatus.textContent = "Round in progress…";
+        } else if (state.phase === "draw") {
+          dom.gameStatus.textContent = "Player " + (state.currentPlayer + 1) +
+            (state.currentPlayer === 0 ? " (You)" : " (AI)") + " — draw a card";
+        } else if (state.phase === "play") {
+          dom.gameStatus.textContent = "Player " + (state.currentPlayer + 1) +
+            (state.currentPlayer === 0 ? " (You)" : " (AI)") + " — play a card";
+        } else {
+          dom.gameStatus.textContent = "Waiting to start…";
+        }
+      }
+
+      function showMessage(text, type) {
+        var msg = dom.gameMessage;
+        msg.textContent = text;
+        msg.className = "game-message is-" + (type || "info");
+        msg.classList.remove("hidden");
+      }
+
+      function hideMessage() {
+        dom.gameMessage.classList.add("hidden");
+      }
+
+      function renderAll() {
+        renderHand(0);
+        renderHand(1);
+        renderDeck();
+        renderBattlefield();
+        renderScores();
+        renderActivePlayer();
+        renderStatus();
+        updateHandLabel();
+      }
+
+      function updateHandLabel() {
+        var label = dom.handLabel;
+        if (state.gameOver) {
+          label.textContent = "Your hand";
+          label.classList.remove("is-active-label");
+        } else if (state.currentPlayer === 0 && state.phase === "play" && !state.roundInProgress) {
+          label.textContent = "Your hand — click a card to play it";
+          label.classList.add("is-active-label");
+        } else {
+          label.textContent = "Your hand";
+          label.classList.remove("is-active-label");
+        }
+      }
+
+      /* ================================================================
+         Game logic
+         ================================================================ */
+
+      function startGame() {
+        state.deck = shuffle(buildDeck());
+        state.hands = [[], []];
+        state.battlefield = [null, null];
+        state.scores = [0, 0];
+        state.currentPlayer = 0;
+        state.phase = "draw";
+        state.roundInProgress = false;
+        state.gameOver = false;
+
+        hideMessage();
+        dom.gameOverPanel.classList.remove("is-visible");
+
+        dealInitialCards();
+        renderAll();
+        showMessage("New game! Player " + (state.currentPlayer + 1) + " (You), draw a card from the deck.", "info");
+
+        setTimeout(handleAITurn, 600);
+      }
+
+      function dealInitialCards() {
+        for (var i = 0; i < 5; i++) {
+          for (var p = 0; p < 2; p++) {
+            if (state.deck.length > 0) {
+              state.hands[p].push(state.deck.pop());
+            }
+          }
+        }
+      }
+
+      function drawCard() {
+        if (state.phase !== "draw" || state.gameOver) { return; }
+        if (state.deck.length === 0) {
+          showMessage("Player " + (state.currentPlayer + 1) +
+            (state.currentPlayer === 0 ? " (You)" : " (AI)") +
+            " — deck is empty! Play a card from your hand.", "info");
+          state.phase = "play";
+          renderAll();
+          if (state.currentPlayer === 1) {
+            setTimeout(aiPlayCard, 600);
+          }
+          return;
+        }
+
+        var drawn = state.deck.pop();
+        state.hands[state.currentPlayer].push(drawn);
+        hideMessage();
+        renderAll();
+
+        showMessage("Player " + (state.currentPlayer + 1) +
+          (state.currentPlayer === 0 ? " (You)" : " (AI)") +
+          " drew a " + drawn.value + " of " + drawn.suit + ". Now play a card.", "info");
+        state.phase = "play";
+        renderAll();
+
+        if (state.currentPlayer === 1) {
+          setTimeout(aiPlayCard, 800);
+        }
+      }
+
+      function playCard(player, cardIndex) {
+        if (state.phase !== "play" || state.gameOver) { return; }
+        if (player !== state.currentPlayer) { return; }
+        if (cardIndex < 0 || cardIndex >= state.hands[player].length) { return; }
+
+        var card = state.hands[player].splice(cardIndex, 1)[0];
+        state.battlefield[player] = card;
+        hideMessage();
+        renderAll();
+
+        state.roundInProgress = true;
+        renderAll();
+        showMessage("Player " + (player + 1) +
+          (player === 0 ? " (You)" : " (AI)") +
+          " played a " + card.value + " of " + card.suit + ".", "info");
+
+        scheduleBattleResolution();
+      }
+
+      function scheduleBattleResolution() {
+        if (state.battlefield[0] && state.battlefield[1]) {
+          setTimeout(resolveBattle, 700);
+          return;
+        }
+
+        if (!state.battlefield[state.currentPlayer]) { return; }
+
+        state.currentPlayer = state.currentPlayer === 0 ? 1 : 0;
+
+        var canPlay = state.hands[state.currentPlayer].length > 0 || state.deck.length > 0;
+
+        if (!canPlay) {
+          showMessage("Player " + (state.currentPlayer + 1) +
+            (state.currentPlayer === 0 ? " (You)" : " (AI)") +
+            " is out of cards and the deck is empty — round goes to the only player who played.", "info");
+          var onlyPlayer = state.currentPlayer === 0 ? 1 : 0;
+          state.scores[onlyPlayer]++;
+          state.battlefield = [null, null];
+          state.roundInProgress = false;
+          renderAll();
+          checkGameEnd();
+          if (state.gameOver) { return; }
+          refillHands();
+          state.currentPlayer = 0;
+          state.phase = "draw";
+          renderAll();
+          showMessage("New round! Player 1 (You), draw a card.", "info");
+          return;
+        }
+
+        state.phase = "draw";
+        renderAll();
+        showMessage("Player " + (state.currentPlayer + 1) +
+          (state.currentPlayer === 0 ? " (You)" : " (AI)") +
+          " — draw a card.", "info");
+
+        if (state.currentPlayer === 1) {
+          setTimeout(handleAITurn, 800);
+        }
+      }
+
+      function resolveBattle() {
+        var card1 = state.battlefield[0];
+        var card2 = state.battlefield[1];
+        var result = compareCards(card1, card2);
+
+        var winnerPlayer = result > 0 ? 0 : result < 0 ? 1 : -1;
+
+        if (winnerPlayer >= 0) {
+          state.scores[winnerPlayer]++;
+        }
+
+        var msg = "";
+        if (winnerPlayer >= 0) {
+          msg = "Player " + (winnerPlayer + 1) +
+            (winnerPlayer === 0 ? " (You)" : " (AI)") +
+            " wins the round! " + card1.value + " of " + card1.suit +
+            " vs " + card2.value + " of " + card2.suit + ".";
+        } else {
+          msg = "It's a tie! Both played " + card1.value + " of " + card1.suit + ".";
+        }
+        showMessage(msg, winnerPlayer >= 0 ? "info" : "draw");
+
+        state.battlefield = [null, null];
+        state.roundInProgress = false;
+
+        checkGameEnd();
+        if (state.gameOver) { return; }
+
+        refillHands();
+        state.currentPlayer = 0;
+        state.phase = "draw";
+        renderAll();
+
+        setTimeout(function () {
+          showMessage("New round! Player " + (state.currentPlayer + 1) + " (You), draw a card.", "info");
+          renderAll();
+          setTimeout(handleAITurn, 600);
+        }, 400);
+      }
+
+      function refillHands() {
+        for (var p = 0; p < 2; p++) {
+          while (state.hands[p].length < 5 && state.deck.length > 0) {
+            state.hands[p].push(state.deck.pop());
+          }
+        }
+      }
+
+      function checkGameEnd() {
+        var totalCards = 0;
+        for (var p = 0; p < 2; p++) {
+          totalCards += state.hands[p].length;
+        }
+        if (state.deck.length === 0 && totalCards === 0) {
+          state.gameOver = true;
+          endGame();
+        }
+      }
+
+      function endGame() {
+        hideMessage();
+        var panel = dom.gameOverPanel;
+        var title = dom.gameOverTitle;
+        var text = dom.gameOverText;
+
+        if (state.scores[0] > state.scores[1]) {
+          title.textContent = "You Win!";
+          text.innerHTML = '<span class="winner-highlight">Congratulations!</span> You won ' +
+            state.scores[0] + ' – ' + state.scores[1] + ' against the AI. Well played!';
+        } else if (state.scores[1] > state.scores[0]) {
+          title.textContent = "AI Wins!";
+          text.innerHTML = '<span class="winner-highlight">Better luck next time.</span> The AI won ' +
+            state.scores[1] + ' – ' + state.scores[0] + '. Try again!';
+        } else {
+          title.textContent = "It's a Tie!";
+          text.innerHTML = '<span class="winner-highlight">A dead heat!</span> Both players scored ' +
+            state.scores[0] + '. That is rare — give it another go!';
+        }
+
+        panel.classList.add("is-visible");
+        state.phase = "idle";
+        renderAll();
+        panel.scrollIntoView({ block: "nearest", behavior: "smooth" });
+      }
+
+      /* ================================================================
+         AI logic
+         ================================================================ */
+
+      function handleAITurn() {
+        if (state.gameOver) { return; }
+        if (state.currentPlayer !== 1) { return; }
+
+        if (state.phase === "draw") {
+          drawCard();
+        }
+      }
+
+      function aiPlayCard() {
+        if (state.gameOver) { return; }
+        if (state.currentPlayer !== 1) { return; }
+        if (state.phase !== "play") { return; }
+
+        if (state.hands[1].length === 0) { return; }
+
+        var cardIndex;
+        var best = -1;
+        var bestIdx = 0;
+
+        for (var i = 0; i < state.hands[1].length; i++) {
+          if (state.hands[1][i].value > best) {
+            best = state.hands[1][i].value;
+            bestIdx = i;
+          }
+        }
+
+        cardIndex = bestIdx;
+
+        var randomFactor = Math.random();
+        if (randomFactor < 0.25) {
+          cardIndex = Math.floor(Math.random() * state.hands[1].length);
+        } else if (randomFactor < 0.5) {
+          var worst = 11;
+          for (var j = 0; j < state.hands[1].length; j++) {
+            if (state.hands[1][j].value < worst) {
+              worst = state.hands[1][j].value;
+              bestIdx = j;
+            }
+          }
+          cardIndex = bestIdx;
+        }
+
+        playCard(1, cardIndex);
+      }
+
+      /* ================================================================
+         Event handlers
+         ================================================================ */
+
+      function initGameEvents() {
+        dom.deckBtn.addEventListener("click", function () {
+          if (state.currentPlayer === 0) {
+            drawCard();
+          }
+        });
+
+        handEl(0).addEventListener("click", function (e) {
+          var cardDiv = e.target.closest(".playing-card");
+          if (!cardDiv) { return; }
+          if (!cardDiv.classList.contains("is-playable")) { return; }
+
+          var cards = handEl(0).querySelectorAll(".playing-card");
+          var index = Array.prototype.indexOf.call(cards, cardDiv);
+
+          if (index >= 0) {
+            playCard(0, index);
+          }
+        });
+
+        Array.prototype.forEach.call(dom.newGameButtons, function (btn) {
+          btn.addEventListener("click", function () {
+            startGame();
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          });
+        });
+      }
+
+      /* ================================================================
+         Boot
+         ================================================================ */
+
+      function init() {
+        if (!dom.deckBtn) { return; }
+        initGameEvents();
+        startGame();
+      }
+
+      if (doc.readyState === "loading") {
+        doc.addEventListener("DOMContentLoaded", init);
+      } else {
+        init();
+      }
+    })();
+  </script>
+</body>
+</html>

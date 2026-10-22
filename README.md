@@ -1,4 +1,4 @@
-# Alex Chen — Personal Site
+# Cui Zhongheng — Personal Site
 
 A hand-written, responsive personal website: four pages, no frameworks, no build
 step, no dependencies. Everything here — the markup, the stylesheet, the
@@ -6,7 +6,7 @@ JavaScript, the illustrations and the icons — was written from scratch for thi
 project.
 
 > **Replace before submitting:** search every file for `TODO` and for the strings
-> `Alex Chen`, `YOUR-USERNAME` and `alex@example.com`. There is a checklist at
+> `Cui Zhongheng`, `YOUR-USERNAME` and `alex@example.com`. There is a checklist at
 > the bottom of this file.
 
 ---
@@ -231,7 +231,7 @@ Graph preview tool — it should show the 1200 × 630 card with your name on it.
 
 Search the project for `TODO` — every placeholder is also marked with a comment.
 
-- [ ] `Alex Chen` → your own name (4 HTML files, plus `README.md`, `site.webmanifest`,
+- [ ] `Cui Zhongheng` → your own name (4 HTML files, plus `README.md`, `site.webmanifest`,
       `og-image.png` and `portrait.svg` if you want the artwork to match)
 - [ ] `YOUR-USERNAME` → your GitHub username (canonical URLs, `og:url`, `og:image`,
       footer links)

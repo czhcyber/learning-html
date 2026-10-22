@@ -1,13 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" role="img"
      aria-labelledby="p2-title">
-  <title id="p2-title">Preview of the Sorting Visualiser project: bars of different heights</title>
-  <!-- Original illustration drawn for this site. -->
+  <title id="p2-title">Preview of the Card Game project: fanned playing cards on a table</title>
   <defs>
     <linearGradient id="p2bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#eef1f8"/>
-      <stop offset="1" stop-color="#e8edff"/>
+      <stop offset="0" stop-color="#f6f7fb"/>
+      <stop offset="1" stop-color="#eef1f8"/>
     </linearGradient>
-    <linearGradient id="p2bar" x1="0" y1="1" x2="0" y2="0">
+    <linearGradient id="p2card1" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#2f5bff"/>
       <stop offset="1" stop-color="#7a4dff"/>
     </linearGradient>
@@ -15,44 +14,50 @@
 
   <rect width="480" height="300" fill="url(#p2bg)"/>
 
-  <!-- panel -->
+  <!-- white panel -->
   <rect x="40" y="34" width="400" height="232" rx="14" fill="#fff" stroke="#dfe3ed" stroke-width="2"/>
 
-  <!-- title bar -->
-  <rect x="62" y="56" width="96" height="10" rx="5" fill="#14161c"/>
-  <rect x="62" y="72" width="60" height="7" rx="3.5" fill="#dfe3ed"/>
+  <!-- header -->
+  <rect x="62" y="50" width="76" height="9" rx="4.5" fill="#14161c"/>
+  <rect x="356" y="48" width="62" height="14" rx="7" fill="#e8edff"/>
 
-  <!-- bar chart, unsorted on the left -->
-  <g>
-    <rect x="62" y="176" width="16" height="46" rx="4" fill="url(#p2bar)"/>
-    <rect x="86" y="140" width="16" height="82" rx="4" fill="url(#p2bar)"/>
-    <rect x="110" y="196" width="16" height="26" rx="4" fill="url(#p2bar)"/>
-    <rect x="134" y="118" width="16" height="104" rx="4" fill="url(#p2bar)"/>
-    <rect x="158" y="162" width="16" height="60" rx="4" fill="url(#p2bar)"/>
-    <rect x="182" y="196" width="16" height="26" rx="4" fill="url(#p2bar)"/>
+  <!-- ===== FANNED CARDS ===== -->
+
+  <!-- card 1 (leftmost, tilted left) -->
+  <g transform="translate(110 190) rotate(-18)">
+    <rect x="0" y="-70" width="56" height="84" rx="6" fill="#fff" stroke="#dfe3ed" stroke-width="2"/>
+    <rect x="6" y="-62" width="12" height="16" rx="2" fill="#7a4dff"/>
+    <circle cx="28" cy="-28" r="14" fill="url(#p2card1)" opacity="0.15"/>
   </g>
 
-  <!-- arrow -->
-  <g transform="translate(222 168)">
-    <path d="M0 8h34" stroke="#7a4dff" stroke-width="4" stroke-linecap="round"/>
-    <path d="M30 0l10 8-10 8" fill="none" stroke="#7a4dff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- card 2 (center-left, slightly tilted) -->
+  <g transform="translate(180 194) rotate(-6)">
+    <rect x="0" y="-70" width="56" height="84" rx="6" fill="#fff" stroke="#dfe3ed" stroke-width="2"/>
+    <rect x="6" y="-62" width="12" height="16" rx="2" fill="#ffd166"/>
+    <circle cx="28" cy="-28" r="14" fill="#ffd166" opacity="0.15"/>
   </g>
 
-  <!-- bar chart, sorted on the right: a staircase -->
-  <g>
-    <rect x="278" y="196" width="16" height="26" rx="4" fill="url(#p2bar)" opacity=".55"/>
-    <rect x="302" y="176" width="16" height="46" rx="4" fill="url(#p2bar)" opacity=".65"/>
-    <rect x="326" y="162" width="16" height="60" rx="4" fill="url(#p2bar)" opacity=".75"/>
-    <rect x="350" y="140" width="16" height="82" rx="4" fill="url(#p2bar)" opacity=".88"/>
-    <rect x="374" y="118" width="16" height="104" rx="4" fill="url(#p2bar)"/>
+  <!-- card 3 (center, straight, highlighted) -->
+  <g transform="translate(250 196)">
+    <rect x="0" y="-70" width="56" height="84" rx="6" fill="#fff" stroke="#2f5bff" stroke-width="2.5"/>
+    <rect x="6" y="-62" width="12" height="16" rx="2" fill="#2f5bff"/>
+    <circle cx="28" cy="-28" r="16" fill="url(#p2card1)" opacity="0.18"/>
+    <!-- suit shape: diamond -->
+    <polygon points="28,-38 36,-28 28,-18 20,-28" fill="#2f5bff"/>
   </g>
 
-  <!-- baseline -->
-  <line x1="62" y1="222" x2="418" y2="222" stroke="#dfe3ed" stroke-width="2"/>
-
-  <!-- complexity labels -->
-  <g fill="#dfe3ed">
-    <rect x="62" y="238" width="52" height="8" rx="4"/>
-    <rect x="278" y="238" width="52" height="8" rx="4"/>
+  <!-- card 4 (center-right, slightly tilted) -->
+  <g transform="translate(320 194) rotate(6)">
+    <rect x="0" y="-70" width="56" height="84" rx="6" fill="#fff" stroke="#dfe3ed" stroke-width="2"/>
+    <rect x="6" y="-62" width="12" height="16" rx="2" fill="#2f5bff"/>
+    <circle cx="28" cy="-28" r="14" fill="url(#p2card1)" opacity="0.15"/>
   </g>
-</svg>
+
+  <!-- card 5 (rightmost, tilted right) -->
+  <g transform="translate(388 190) rotate(18)">
+    <rect x="0" y="-70" width="56" height="84" rx="6" fill="#fff" stroke="#dfe3ed" stroke-width="2"/>
+    <rect x="6" y="-62" width="12" height="16" rx="2" fill="#7a4dff"/>
+    <circle cx="28" cy="-28" r="14" fill="url(#p2card1)" opacity="0.15"/>
+  </g>
+
+  </svg>

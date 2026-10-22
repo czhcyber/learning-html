@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Useless Machine — Cui Zhongheng</title>
+  <meta name="description" content="A browser-based useless machine: flip the switch and watch it flip itself back.">
+
+  <link rel="canonical" href="https://YOUR-USERNAME.github.io/personal-site/useless-machine.html">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/img/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+  <meta name="theme-color" content="#2f6bff">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Cui Zhongheng">
+  <meta property="og:title" content="Useless Machine — Cui Zhongheng">
+  <meta property="og:description" content="Flip the switch. Watch it flip itself back. Absolutely pointless.">
+  <meta property="og:url" content="https://YOUR-USERNAME.github.io/personal-site/useless-machine.html">
+  <meta property="og:image" content="https://YOUR-USERNAME.github.io/personal-site/assets/img/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Cui Zhongheng — useless machine">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem("alex-site-theme");
+        var dark = saved === "dark" ||
+          (!saved && window.matchMedia("(prefers-color-scheme: dark)").matches);
+        if (dark) { document.documentElement.setAttribute("data-theme", "dark"); }
+      } catch (error) { }
+    })();
+  </script>
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <style>
+    body {
+      background: linear-gradient(135deg, #1a2332 0%, #243447 50%, #1e2936 100%);
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      color: #ffffff;
+    }
+
+    .site-header, .page-head, footer {
+      display: none !important;
+    }
+
+    main {
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      box-sizing: border-box;
+    }
+
+    .machine-title {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      letter-spacing: -0.02em;
+    }
+
+    .back-link {
+      color: #94a3b8;
+      text-decoration: none;
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+      transition: color 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .back-link:hover {
+      color: #ffffff;
+    }
+
+    .machine-container {
+      text-align: center;
+    }
+
+    .machine-scene {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 2rem;
+      min-height: 80px;
+    }
+
+    .toggle-switch {
+      position: relative;
+      width: 80px;
+      height: 40px;
+      background: #27ae60;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+      outline: none;
+      box-shadow: 0 4px 15px rgba(39, 174, 96, 0.4);
+    }
+
+    .toggle-switch::after {
+      content: '';
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      width: 32px;
+      height: 32px;
+      background: white;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .toggle-switch.is-off {
+      background: #95a5a6;
+      box-shadow: 0 4px 15px rgba(149, 165, 166, 0.3);
+    }
+
+    .toggle-switch.is-off::after {
+      transform: translateX(0);
+    }
+
+    .toggle-switch.is-on {
+      background: #27ae60;
+      box-shadow: 0 4px 15px rgba(39, 174, 96, 0.4);
+    }
+
+    .toggle-switch.is-on::after {
+      transform: translateX(40px);
+    }
+
+    .toggle-switch.is-animating {
+      pointer-events: none;
+    }
+
+    .finger-icon {
+      position: absolute;
+      left: calc(50% + 45px);
+      top: 50%;
+      transform: translateY(-50%) translateX(15px) scale(0.85);
+      font-size: 2.2rem;
+      opacity: 0;
+      transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+      pointer-events: none;
+    }
+
+    .finger-icon.is-visible {
+      opacity: 1;
+      transform: translateY(-50%) translateX(0) scale(1);
+    }
+
+    .flip-count {
+      font-size: 1rem;
+      color: #94a3b8;
+      margin-top: 1rem;
+    }
+
+    .flip-count .count-number {
+      color: #ef4444;
+      font-weight: 700;
+      font-size: 1.5rem;
+      transition: transform 0.3s ease;
+    }
+
+    .flip-count .count-number.is-bump {
+      animation: bump 0.4s ease;
+    }
+
+    @keyframes bump {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.3); }
+    }
+
+    @media (max-width: 500px) {
+      .machine-title {
+        font-size: 1.5rem;
+      }
+
+      .toggle-switch {
+        width: 70px;
+        height: 35px;
+      }
+
+      .toggle-switch::after {
+        width: 28px;
+        height: 28px;
+      }
+
+      .toggle-switch.is-on::after {
+        transform: translateX(35px);
+      }
+
+      .finger-icon {
+        font-size: 2.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main id="main">
+    <div class="machine-container">
+      <a href="projects.html" class="back-link">← Back to Projects</a>
+      <h1 class="machine-title">
+        🤖 Useless Machine
+      </h1>
+
+      <div class="machine-scene">
+        <button
+          class="toggle-switch is-off"
+          type="button"
+          data-switch
+          aria-label="Toggle switch — currently off"
+          aria-pressed="false"
+        ></button>
+        <span class="finger-icon" data-finger>👆</span>
+      </div>
+
+      <div class="flip-count">
+        被推回: <span class="count-number" data-flip-count>0</span> 次
+      </div>
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      "use strict";
+
+      var dom = {
+        switchBtn: document.querySelector("[data-switch]"),
+        finger: document.querySelector("[data-finger]"),
+        flipCount: document.querySelector("[data-flip-count]")
+      };
+
+      if (!dom.switchBtn) { return; }
+
+      var flipTotal = 0;
+      var isAnimating = false;
+
+      function bumpCount() {
+        dom.flipCount.classList.remove("is-bump");
+        void dom.flipCount.offsetWidth;
+        dom.flipCount.classList.add("is-bump");
+      }
+
+      function runUselessCycle() {
+        if (isAnimating) { return; }
+        isAnimating = true;
+
+        setSwitchOn();
+
+        setTimeout(function () {
+          dom.finger.classList.add("is-visible");
+        }, 300);
+
+        setTimeout(function () {
+          setSwitchOff();
+          dom.finger.classList.remove("is-visible");
+          bumpCount();
+          flipTotal++;
+          dom.flipCount.textContent = String(flipTotal);
+          isAnimating = false;
+        }, 1200);
+      }
+
+      function setSwitchOn() {
+        dom.switchBtn.classList.remove("is-off");
+        dom.switchBtn.classList.add("is-on");
+        dom.switchBtn.setAttribute("aria-pressed", "true");
+        dom.switchBtn.setAttribute("aria-label", "Toggle switch — currently on");
+      }
+
+      function setSwitchOff() {
+        dom.switchBtn.classList.remove("is-on");
+        dom.switchBtn.classList.add("is-off");
+        dom.switchBtn.setAttribute("aria-pressed", "false");
+        dom.switchBtn.setAttribute("aria-label", "Toggle switch — currently off");
+      }
+
+      dom.switchBtn.addEventListener("click", function () {
+        if (dom.switchBtn.classList.contains("is-on")) { return; }
+        runUselessCycle();
+      });
+    })();
+  </script>
+</body>
+</html>

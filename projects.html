@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<!-- TODO: replace "Alex Chen", YOUR-USERNAME and alex@example.com, and rewrite the text in your own words. -->
+<!-- TODO: replace "Cui Zhongheng", YOUR-USERNAME and alex@example.com, and rewrite the text in your own words. -->
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Projects — Alex Chen</title>
-  <meta name="description" content="Small web projects built by Alex Chen, including the ones that did not work out.">
+  <title>Projects — Cui Zhongheng</title>
+  <meta name="description" content="Small web projects built by Cui Zhongheng, including the ones that did not work out.">
 
   <link rel="canonical" href="https://YOUR-USERNAME.github.io/personal-site/projects.html">
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
@@ -16,14 +16,14 @@
   <meta name="theme-color" content="#2f6bff">
 
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Alex Chen">
-  <meta property="og:title" content="Projects by Alex Chen">
+  <meta property="og:site_name" content="Cui Zhongheng">
+  <meta property="og:title" content="Projects by Cui Zhongheng">
   <meta property="og:description" content="Small web projects, including the ones that did not work out.">
   <meta property="og:url" content="https://YOUR-USERNAME.github.io/personal-site/projects.html">
   <meta property="og:image" content="https://YOUR-USERNAME.github.io/personal-site/assets/img/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Alex Chen — personal website">
+  <meta property="og:image:alt" content="Cui Zhongheng — personal website">
   <meta name="twitter:card" content="summary_large_image">
 
   <!-- Set the colour theme before the first paint, so a dark-theme visitor
@@ -48,7 +48,7 @@
     <div class="container header-inner">
       <a class="brand" href="index.html">
         <img class="brand-mark" src="assets/img/favicon.svg" alt="" width="32" height="32">
-        <span class="brand-text">Alex&nbsp;Chen</span>
+        <span class="brand-text">Cui&nbsp;Zhongheng</span>
       </a>
 
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
@@ -63,9 +63,9 @@
       <nav class="site-nav" id="site-nav" aria-label="Main navigation">
         <ul class="nav-list">
           <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
+          <li><a href="about.html">Quote</a></li>
           <li><a href="projects.html" aria-current="page">Projects</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="contact.html">Now</a></li>
         </ul>
       </nav>
 
@@ -117,77 +117,88 @@
         <div class="project-grid" data-project-grid>
 
           <article class="project" data-tags="web">
-            <figure class="project-figure">
-              <img src="assets/img/project-1.svg" alt="Abstract preview of a study timer interface." width="480" height="300">
-            </figure>
-            <div class="project-body">
-              <h3>Study Timer</h3>
-              <p>
-                A countdown timer for revision sessions. I built it because every timer
-                app I tried wanted an account. It stores your last session length in
-                local storage and does nothing else.
-              </p>
-              <ul class="tag-list">
-                <li>HTML</li>
-                <li>CSS</li>
-                <li>JavaScript</li>
-              </ul>
-            </div>
+            <a class="project-link" href="study timer.html" aria-label="Use the Study Timer">
+              <figure class="project-figure">
+                <img src="assets/img/study-timer-preview.svg" alt="Preview of Study Timer with Pomodoro technique and dark theme." width="480" height="300">
+              </figure>
+              <div class="project-body">
+                <h3>Study Timer</h3>
+                <p>
+                  A countdown timer for revision sessions. I built it because every timer
+                  app I tried wanted an account. It stores your last session length in
+                  local storage and does nothing else.
+                </p>
+                <ul class="tag-list">
+                  <li>HTML</li>
+                  <li>CSS</li>
+                  <li>JavaScript</li>
+                </ul>
+                <span class="project-cta">Start timing →</span>
+              </div>
+            </a>
           </article>
 
-          <article class="project" data-tags="coursework">
-            <figure class="project-figure">
-              <img src="assets/img/project-2.svg" alt="Abstract preview of a sorted data visualisation." width="480" height="300">
-            </figure>
-            <div class="project-body">
-              <h3>Sorting Visualiser</h3>
-              <p>
-                An animated comparison of four sorting algorithms, written for a data
-                structures assignment. Watching bubble sort lose to merge sort is far
-                more convincing than a complexity table.
-              </p>
-              <ul class="tag-list">
-                <li>Algorithms</li>
-                <li>Canvas</li>
-              </ul>
-            </div>
+          <article class="project" data-tags="web">
+            <a class="project-link" href="card-game.html" aria-label="Play the Card Game">
+              <figure class="project-figure">
+                <img src="assets/img/project-2.svg" alt="Abstract preview of a card game interface with fanned cards." width="480" height="300">
+              </figure>
+              <div class="project-body">
+                <h3>Card Game</h3>
+                <p>
+                  A browser-based card game where two players take turns drawing and
+                  playing cards. Built to explore DOM manipulation and game state
+                  management in vanilla JavaScript — no libraries, just shuffling logic
+                  and a clean UI.
+                </p>
+                <ul class="tag-list">
+                  <li>HTML</li>
+                  <li>CSS</li>
+                  <li>JavaScript</li>
+                </ul>
+                <span class="project-cta">Play the game →</span>
+              </div>
+            </a>
           </article>
 
           <article class="project" data-tags="web experiment">
-            <figure class="project-figure">
-              <img src="assets/img/project-3.svg" alt="Abstract preview of a grid of photo thumbnails." width="480" height="300">
-            </figure>
-            <div class="project-body">
-              <h3>Film Log</h3>
-              <p>
-                A one-page log of every roll of film I have shot, with the camera, the
-                stock and a note about what went wrong. Responsive CSS grid does all
-                the work; there is no backend at all.
-              </p>
-              <ul class="tag-list">
-                <li>HTML</li>
-                <li>CSS Grid</li>
-              </ul>
-            </div>
+            <a class="project-link" href="password-generator.html" aria-label="Use the Password Generator">
+              <figure class="project-figure">
+                <img src="assets/img/password-generator-preview.svg" alt="Preview of Password Generator with dark theme and strength meter." width="480" height="300">
+              </figure>
+              <div class="project-body">
+                <h3>Password Generator</h3>
+                <p>
+                  A secure password generator that creates random, strong passwords
+                  instantly. Customize length, character types, and check strength in
+                  real-time. Built for anyone who needs better passwords without the hassle.
+                </p>
+                <ul class="tag-list">
+                  <li>HTML</li>
+                  <li>CSS</li>
+                  <li>JavaScript</li>
+                </ul>
+                <span class="project-cta">Generate passwords →</span>
+              </div>
+            </a>
           </article>
 
           <article class="project" data-tags="experiment">
-            <figure class="project-figure">
-              <img src="assets/img/project-4.svg" alt="Abstract preview of a keyboard focus outline experiment." width="480" height="300">
-            </figure>
-            <div class="project-body">
-              <h3>Keyboard-Only Test</h3>
-              <p>
-                An experiment rather than a product: I removed all mouse styling from a
-                page and tried to use it with the keyboard alone. The write-up of what
-                broke is more useful than the page itself, and it changed how I write
-                markup.
-              </p>
-              <ul class="tag-list">
-                <li>Accessibility</li>
-                <li>Write-up</li>
-              </ul>
-            </div>
+            <a class="project-link" href="useless-machine.html" aria-label="Try the Useless Machine">
+              <figure class="project-figure">
+                <img src="useless machine.png" alt="Abstract preview of a useless machine box with a toggle switch." width="480" height="300">
+              </figure>
+              <div class="project-body">
+                <h3>Useless Machine</h3>
+                <p>
+                  This is my second small project. It is a small box with a toggle switch that does the most important thing: nothing. Flip the switch on, and a tiny arm swings out from inside the box to flip it right back off. I love this funny, ironic little idea.
+                </p>
+                <ul class="tag-list">
+                  <li>HTML</li>
+                </ul>
+                <span class="project-cta">Try it out →</span>
+              </div>
+            </a>
           </article>
 
         </div>
@@ -233,7 +244,7 @@
   <footer class="site-footer">
     <div class="container footer-inner">
       <div class="footer-col">
-        <h2 class="footer-title">Alex Chen</h2>
+        <h2 class="footer-title">Cui Zhongheng</h2>
         <p class="footer-note">
           A personal site built from scratch with semantic HTML, responsive CSS and a
           little vanilla JavaScript. No frameworks.
@@ -244,9 +255,9 @@
         <h2 class="footer-title">Pages</h2>
         <ul class="footer-links">
           <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
+          <li><a href="about.html">Quote</a></li>
           <li><a href="projects.html">Projects</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="contact.html">Now</a></li>
         </ul>
       </nav>
 
@@ -260,7 +271,7 @@
     </div>
 
     <div class="container footer-bottom">
-      <p>&copy; <span data-current-year>2025</span> Alex Chen. Built by hand.</p>
+      <p>&copy; <span data-current-year>2025</span> Cui Zhongheng. Built by hand.</p>
     </div>
   </footer>
 

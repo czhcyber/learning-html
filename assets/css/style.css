@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Alex Chen — personal site
+   Cui Zhongheng — personal site
    style.css  (part 1 of 2: tokens, layout, components)
    Written by hand. No framework, no reset library, no build step.
    Part 2 (the responsive layer) is appended at the end of this file.
@@ -654,6 +654,14 @@ button, input, select, textarea {
 /* Added by JavaScript while filtering */
 .project.is-hidden { display: none; }
 
+.project-link {
+  display: flex;
+  flex-direction: column;
+  color: inherit;
+  text-decoration: none;
+  height: 100%;
+}
+
 .project-figure {
   margin: 0;
   background-color: var(--surface-2);
@@ -670,6 +678,20 @@ button, input, select, textarea {
 }
 
 .project-body p { margin-bottom: 0; color: var(--text-muted); }
+
+.project-cta {
+  display: inline-block;
+  margin-top: auto;
+  padding-top: var(--space-2);
+  font-size: .85rem;
+  font-weight: 700;
+  color: var(--accent);
+  transition: transform var(--transition);
+}
+
+.project:hover .project-cta {
+  transform: translateX(4px);
+}
 
 .empty-state {
   padding: var(--space-4);
@@ -934,7 +956,7 @@ html.js .reveal.is-visible {
 }
 
 /* ==========================================================================
-   Alex Chen — personal site
+   Cui Zhongheng — personal site
    style.css  (part 2 of 2: the responsive layer and print styles)
 
    The base styles above are written mobile-first: every multi-column rule
@@ -1014,6 +1036,7 @@ html.js .reveal.is-visible {
 .split,
 .card-grid,
 .project-grid,
+.quote-grid,
 .facts,
 .footer-inner,
 .skills,
@@ -1045,6 +1068,7 @@ h2 { font-size: clamp(1.35rem, 1.05rem + 1.1vw, 1.85rem); }
   .container { padding-inline: var(--space-4); }
 
   .card-grid,
+  .quote-grid,
   .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 
   .footer-inner { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -1072,7 +1096,8 @@ h2 { font-size: clamp(1.35rem, 1.05rem + 1.1vw, 1.85rem); }
    25. Large screens
    -------------------------------------------------------------------------- */
 @media (min-width: 1024px) {
-  .card-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .card-grid,
+  .quote-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 
   .facts { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 
@@ -1113,6 +1138,130 @@ html.js .skill-fill.is-measured { width: var(--level, 0%); }
   .card:hover,
   .project:hover { transform: none; }
 }
+
+/* --------------------------------------------------------------------------
+   28. Quote page
+   -------------------------------------------------------------------------- */
+.quote-hero {
+  position: relative;
+  padding: var(--space-5) var(--space-4);
+  text-align: center;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.quote-hero-mark {
+  display: block;
+  font-size: 5rem;
+  line-height: 1;
+  color: var(--accent);
+  opacity: .25;
+  font-family: Georgia, "Times New Roman", serif;
+  margin-bottom: var(--space-2);
+}
+
+.quote-hero blockquote {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.quote-hero blockquote p {
+  font-size: clamp(1.2rem, 1rem + 1vw, 1.65rem);
+  font-weight: 600;
+  line-height: 1.45;
+  letter-spacing: -.01em;
+  margin-bottom: var(--space-3);
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.quote-hero footer {
+  font-size: .95rem;
+  color: var(--text-muted);
+  margin-bottom: var(--space-4);
+}
+
+.quote-hero cite {
+  font-style: normal;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.quote-hero .quote-source {
+  color: var(--text-muted);
+  margin-left: .25rem;
+}
+
+.quote-hero-shuffle {
+  margin: 0 auto;
+}
+
+.quote-grid {
+  display: grid;
+  gap: var(--space-3);
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.quote-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-4);
+}
+
+.quote-card blockquote {
+  margin: 0;
+  padding: 0;
+  border: none;
+  flex: 1;
+}
+
+.quote-card blockquote p {
+  font-size: .98rem;
+  font-weight: 500;
+  line-height: 1.55;
+  margin-bottom: 0;
+  color: var(--text);
+}
+
+.quote-card blockquote p::before { content: "\201C"; }
+.quote-card blockquote p::after  { content: "\201D"; }
+
+.quote-card footer {
+  font-size: .85rem;
+  color: var(--text-muted);
+  margin-top: auto;
+}
+
+.quote-card cite {
+  font-style: normal;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.quote-category {
+  display: inline-block;
+  align-self: flex-start;
+  padding: .15rem .55rem;
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background-color: var(--accent-soft);
+  border-radius: 999px;
+  margin-bottom: var(--space-1);
+}
+
+.quote-source {
+  display: inline;
+  font-style: italic;
+}
+
+.quote-card.is-hidden { display: none; }
 
 /* --------------------------------------------------------------------------
    28. Print — the pages should still make sense on paper

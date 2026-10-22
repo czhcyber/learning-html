@@ -1,74 +1,52 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" role="img"
      aria-labelledby="p4-title">
-  <title id="p4-title">Preview of the Keyboard-Only Test project: a keyboard with a visible focus ring</title>
-  <!-- Original illustration drawn for this site. -->
+  <title id="p4-title">Preview of the Useless Machine project: a box that turns itself off</title>
   <defs>
     <linearGradient id="p4bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#e8edff"/>
-      <stop offset="1" stop-color="#f6f7fb"/>
+      <stop offset="0" stop-color="#f6f7fb"/>
+      <stop offset="1" stop-color="#eef1f8"/>
+    </linearGradient>
+    <linearGradient id="p4arm" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2f5bff"/>
+      <stop offset="1" stop-color="#7a4dff"/>
     </linearGradient>
   </defs>
 
   <rect width="480" height="300" fill="url(#p4bg)"/>
 
-  <!-- keyboard body -->
-  <rect x="48" y="76" width="384" height="164" rx="16" fill="#fff" stroke="#dfe3ed" stroke-width="2"/>
+  <!-- white panel -->
+  <rect x="40" y="34" width="400" height="232" rx="14" fill="#fff" stroke="#dfe3ed" stroke-width="2"/>
 
-  <!-- key rows, drawn as small rounded rectangles -->
-  <g fill="#eef1f8" stroke="#dfe3ed" stroke-width="1.5">
-    <!-- row 1 -->
-    <rect x="68"  y="96"  width="30" height="26" rx="6"/>
-    <rect x="104" y="96"  width="30" height="26" rx="6"/>
-    <rect x="140" y="96"  width="30" height="26" rx="6"/>
-    <rect x="176" y="96"  width="30" height="26" rx="6"/>
-    <rect x="212" y="96"  width="30" height="26" rx="6"/>
-    <rect x="248" y="96"  width="30" height="26" rx="6"/>
-    <rect x="284" y="96"  width="30" height="26" rx="6"/>
-    <rect x="320" y="96"  width="30" height="26" rx="6"/>
-    <rect x="356" y="96"  width="56" height="26" rx="6"/>
+  <!-- header -->
+  <rect x="62" y="50" width="76" height="9" rx="4.5" fill="#14161c"/>
+  <rect x="356" y="48" width="62" height="14" rx="7" fill="#e8edff"/>
 
-    <!-- row 2 -->
-    <rect x="68"  y="128" width="42" height="26" rx="6"/>
-    <rect x="116" y="128" width="30" height="26" rx="6"/>
-    <rect x="152" y="128" width="30" height="26" rx="6"/>
-    <rect x="188" y="128" width="30" height="26" rx="6"/>
-    <rect x="224" y="128" width="30" height="26" rx="6"/>
-    <rect x="260" y="128" width="30" height="26" rx="6"/>
-    <rect x="296" y="128" width="30" height="26" rx="6"/>
-    <rect x="332" y="128" width="80" height="26" rx="6"/>
+  <!-- ===== USELESS MACHINE ===== -->
 
-    <!-- row 3 -->
-    <rect x="68"  y="160" width="52" height="26" rx="6"/>
-    <rect x="126" y="160" width="30" height="26" rx="6"/>
-    <rect x="162" y="160" width="30" height="26" rx="6"/>
-    <rect x="198" y="160" width="30" height="26" rx="6"/>
-    <rect x="234" y="160" width="30" height="26" rx="6"/>
-    <rect x="270" y="160" width="30" height="26" rx="6"/>
-    <rect x="306" y="160" width="106" height="26" rx="6"/>
-  </g>
+  <!-- box body -->
+  <rect x="130" y="86" width="220" height="120" rx="12" fill="#fff" stroke="#dfe3ed" stroke-width="2"/>
 
-  <!-- the Tab key, highlighted, with a visible focus ring -->
-  <g>
-    <rect x="68" y="192" width="66" height="26" rx="6" fill="#2f5bff"/>
-    <text x="101" y="210" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif"
-          font-size="13" font-weight="700" fill="#fff">Tab</text>
-    <rect x="62" y="186" width="78" height="38" rx="10" fill="none" stroke="#7a4dff" stroke-width="3" stroke-dasharray="6 5"/>
-  </g>
+  <!-- toggle switch: base -->
+  <rect x="222" y="62" width="36" height="14" rx="4" fill="#5b6273"/>
+  <!-- toggle lever (flipped forward / ON position) -->
+  <rect x="234" y="34" width="12" height="30" rx="5" fill="#2f5bff"/>
 
-  <!-- focus indicator arrow pointing at the ring -->
-  <g transform="translate(140 150)">
-    <path d="M34 46C20 34 8 22 2 8" fill="none" stroke="#7a4dff" stroke-width="3" stroke-linecap="round"/>
-    <path d="M8 12l-6-6-4 8Z" fill="#7a4dff"/>
-  </g>
+  <!-- door opening on front face -->
+  <rect x="150" y="108" width="80" height="70" rx="8" fill="#14161c" opacity="0.82"/>
 
-  <!-- remaining space bar row -->
-  <g fill="#eef1f8" stroke="#dfe3ed" stroke-width="1.5">
-    <rect x="144" y="192" width="30" height="26" rx="6"/>
-    <rect x="180" y="192" width="30" height="26" rx="6"/>
-    <rect x="216" y="192" width="142" height="26" rx="6"/>
-    <rect x="364" y="192" width="48" height="26" rx="6"/>
-  </g>
+  <!-- mechanical arm -->
+  <!-- motor base inside the box -->
+  <rect x="168" y="174" width="18" height="16" rx="4" fill="#5b6273"/>
 
-  <!-- caption strip -->
-  <rect x="48" y="252" width="164" height="12" rx="6" fill="#dfe3ed"/>
+  <!-- lower arm (vertical) -->
+  <rect x="175" y="130" width="10" height="46" rx="5" fill="url(#p4arm)"/>
+
+  <!-- elbow joint -->
+  <circle cx="180" cy="128" r="7" fill="#2f5bff"/>
+
+  <!-- upper arm reaching diagonally toward the switch -->
+  <rect x="180" y="58" width="9" height="72" rx="4.5" fill="url(#p4arm)" transform="rotate(-48 184 58)"/>
+
+  <!-- hand / finger tip touching the lever -->
+  <circle cx="240" cy="38" r="5" fill="#7a4dff"/>
 </svg>

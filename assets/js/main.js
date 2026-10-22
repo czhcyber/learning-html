@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Alex Chen — personal site
+   Cui Zhongheng — personal site
    main.js  (part 1 of 2)
 
    Deliberately small: this file adds behaviour that HTML cannot express on
@@ -143,7 +143,7 @@
 })();
 
 /* ==========================================================================
-   Alex Chen — personal site
+   Cui Zhongheng — personal site
    main.js  (part 2 of 2)
 
    The interactive pieces:
@@ -417,6 +417,109 @@
   }
 
   /* ==================================================================
+     6c. Quote hero shuffle
+     ================================================================== */
+  function initQuoteHero() {
+    var heroText = doc.getElementById("hero-quote-text");
+    var heroCite = doc.getElementById("hero-quote-cite");
+    var shuffleBtn = doc.getElementById("shuffle-btn");
+    if (!heroText || !heroCite || !shuffleBtn) { return; }
+
+    var quotes = [];
+    var lastIdx = -1;
+
+    var cards = doc.querySelectorAll(".quote-card");
+    Array.prototype.forEach.call(cards, function (card) {
+      var p = card.querySelector("blockquote p");
+      var cite = card.querySelector("cite");
+      var source = card.querySelector(".quote-source");
+      if (p) {
+        quotes.push({
+          text: p.textContent,
+          cite: cite ? cite.textContent : "",
+          source: source ? source.textContent : ""
+        });
+      }
+    });
+
+    if (quotes.length === 0) { return; }
+
+    function pickRandom() {
+      var idx;
+      do {
+        idx = Math.floor(Math.random() * quotes.length);
+      } while (idx === lastIdx && quotes.length > 1);
+      lastIdx = idx;
+      return quotes[idx];
+    }
+
+    function showQuote() {
+      var q = pickRandom();
+      heroText.style.opacity = "0";
+      heroText.style.transform = "translateY(8px)";
+      setTimeout(function () {
+        heroText.textContent = q.text;
+        heroCite.textContent = q.cite;
+        if (q.source) {
+          heroCite.appendChild(doc.createTextNode(", "));
+          var srcSpan = doc.createElement("span");
+          srcSpan.className = "quote-source";
+          srcSpan.textContent = q.source;
+          heroCite.appendChild(srcSpan);
+        }
+        heroText.style.opacity = "1";
+        heroText.style.transform = "translateY(0)";
+      }, 180);
+    }
+
+    shuffleBtn.addEventListener("click", function () {
+      showQuote();
+    });
+  }
+
+  /* ==================================================================
+     6d. Quote filter
+     ================================================================== */
+  function initQuoteFilter() {
+    var grid = doc.querySelector(".quote-grid");
+    if (!grid) { return; }
+
+    var buttons = doc.querySelectorAll(".filter-bar .filter-button");
+    var items = grid.querySelectorAll(".quote-card");
+    var status = doc.querySelector(".filter-status");
+
+    function applyFilter(filter) {
+      var shown = 0;
+      Array.prototype.forEach.call(items, function (item) {
+        var cat = item.getAttribute("data-category") || "";
+        var matches = filter === "all" || cat === filter;
+        item.classList.toggle("is-hidden", !matches);
+        if (matches) { shown += 1; }
+      });
+
+      if (status) {
+        status.textContent = filter === "all"
+          ? "Showing all " + shown + " quotes."
+          : "Showing " + shown + " quote" + (shown === 1 ? "" : "s") +
+            " in \u201C" + filter + "\u201D.";
+      }
+    }
+
+    Array.prototype.forEach.call(buttons, function (button) {
+      button.addEventListener("click", function () {
+        Array.prototype.forEach.call(buttons, function (other) {
+          var active = other === button;
+          other.classList.toggle("is-active", active);
+          other.setAttribute("aria-pressed", active ? "true" : "false");
+        });
+        applyFilter(button.getAttribute("data-filter"));
+      });
+    });
+
+    applyFilter("all");
+  }
+
+  /* ==================================================================
      Boot
      ================================================================== */
   function init() {
@@ -424,6 +527,8 @@
     initProjectFilter();
     initScrollReveal();
     initSkillBars();
+    initQuoteHero();
+    initQuoteFilter();
   }
 
   if (doc.readyState === "loading") {
