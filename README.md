@@ -20,7 +20,7 @@ scratch for this project.
 
 | | |
 |---|---|
-| **Address** | https://YOUR-USERNAME.github.io/personal-site/ |
+| **Address** | https://czhcyber.github.io/learning-html/ |
 | **Host** | GitHub Pages, served from the `main` branch (root folder) |
 | **Cost** | Free |
 
@@ -46,7 +46,7 @@ Each project has its own dedicated sub-page with full functionality:
 
 | Project | File | Description |
 |---------|------|-------------|
-| 🍅 **Study Timer** | `study timer.html` | Pomodoro-based study tool with multiple modes, task tracking, statistics, and notifications |
+| 🍅 **Study Timer** | `study-timer.html` | Pomodoro-based study tool with multiple modes, task tracking, statistics, and notifications |
 | 🃏 **Card Game** | `card-game.html` | Browser-based card game with complete game logic, turn-based gameplay, and clean UI |
 | 🔐 **Password Generator** | `password-generator.html` | Secure password generator with customizable options, real-time strength meter, and one-click copy |
 | 🤖 **Useless Machine** | `useless-machine.html` | Fun interactive animation where a finger pushes a toggle switch back |
@@ -71,7 +71,7 @@ All projects feature:
 │   └── contact.html            Now Page (current status & goals)
 │
 ├── Interactive Projects
-│   ├── study timer.html        Pomodoro study timer
+│   ├── study-timer.html        Pomodoro study timer
 │   ├── card-game.html          Browser card game
 │   ├── password-generator.html Secure password generator
 │   └── useless-machine.html    Interactive animation project
@@ -95,7 +95,7 @@ All projects feature:
         ├── icon-192.png                   Android / PWA app icon (192×192)
         ├── icon-512.png                   Android / PWA app icon (512×512)
         ├── icon-512-maskable.png          Android adaptive icon
-        ├── og-image.png                   Open Graph share preview (1200×630)
+        ├── og-image.jpg                   Open Graph share preview (1200×630)
         ├── hero-illustration.svg          Home page illustration
         ├── portrait.svg                   About page portrait
         ├── study-timer-preview.svg        Study Timer card preview
@@ -131,7 +131,7 @@ Then open <http://127.0.0.1:8899/>.
 - `contact.html` — Now Page: current focus, goals, tools, fun facts (inspired by Derek Sivers)
 
 **Interactive project sub-pages (4):**
-- `study timer.html` — Full-featured Pomodoro timer with multiple modes
+- `study-timer.html` — Full-featured Pomodoro timer with multiple modes
 - `card-game.html` — Browser-based card game with game logic
 - `password-generator.html` — Secure password generator with strength meter
 - `useless-machine.html` — Fun animation project with finger interaction
@@ -217,7 +217,7 @@ The project was committed in stages, showing iterative development:
 3. Now Page transformation: `contact.html` reimagined
 4. Interactive projects added:
    - Card Game (`card-game.html`)
-   - Study Timer (`study timer.html`)
+   - Study Timer (`study-timer.html`)
    - Password Generator (`password-generator.html`)
    - Useless Machine (`useless-machine.html`)
 5. Visual assets: project preview images, updated icons
@@ -232,7 +232,7 @@ The project was committed in stages, showing iterative development:
 * **App icon** — `apple-touch-icon.png` for iOS, `icon-192.png` and
   `icon-512.png` for Android, plus `icon-512-maskable.png` for adaptive icons.
   All declared in `site.webmanifest`.
-* **Open Graph image** — `og-image.png`, exactly **1200 × 630 px**, declared on
+* **Open Graph image** — `og-image.jpg`, exactly **1200 × 630 px**, declared on
   all main pages alongside `twitter:card`.
 
 ---
@@ -250,7 +250,7 @@ Every image in this project is original work created for it.
 | `project-1.svg` … `project-4.svg` | Hand-drawn SVG, this project |
 | `favicon.svg` | Hand-drawn SVG monogram, this project |
 | `favicon-32.png`, `favicon.ico`, `apple-touch-icon.png`, `icon-192.png`, `icon-512.png`, `icon-512-maskable.png` | Rasterised from the same monogram |
-| `og-image.png` | Composed from the monogram and CSS-style shapes |
+| `og-image.jpg` | Composed from the monogram and CSS-style shapes |
 
 ### Interactive project previews
 
@@ -265,33 +265,19 @@ either.
 
 ---
 
-## Deploying to GitHub Pages
+## Deployed
 
-1. Create a new **public** repository named `personal-site` on GitHub. Do not add
-   a README, `.gitignore` or licence — the repository must start empty.
-2. In this folder, point the local repository at it (replace `YOUR-USERNAME`):
+The site is live at:
 
-   ```bash
-   git remote add origin https://github.com/YOUR-USERNAME/personal-site.git
-   git branch -M main
-   git push -u origin main
-   ```
+```
+https://czhcyber.github.io/learning-html/
+```
 
-3. On GitHub, open the repository → **Settings** → **Pages**.
-4. Under **Build and deployment**, set **Source** to *Deploy from a branch*, pick
-   the **main** branch and the **/ (root)** folder, then **Save**.
-5. Wait one to two minutes. The site appears at:
-
-   ```
-   https://YOUR-USERNAME.github.io/personal-site/
-   ```
-
-6. Replace every `YOUR-USERNAME` in the four HTML files with your real username,
-   then commit and push again so the Open Graph image and canonical URLs point at
-   the live address.
+It is hosted on GitHub Pages from the `main` branch (root folder). To redeploy,
+push to `main` — GitHub Pages rebuilds automatically within a couple of minutes.
 
 To check that the Open Graph card is correct, paste the live URL into any Open
-Graph preview tool — it should show the 1200 × 630 card with your name on it.
+Graph preview tool (or a chat app) — it should show the 1200 × 630 card.
 
 ---
 
@@ -301,7 +287,7 @@ Search the project for `TODO` — every placeholder is also marked with a commen
 
 ### Before deploying:
 
-- [ ] Replace `YOUR-USERNAME` with your real GitHub username in:
+- [x] Replace `YOUR-USERNAME` with your real GitHub username in:
   - All 4 main HTML files (canonical URLs, Open Graph data)
   - Footer links
   - This README file
@@ -316,7 +302,7 @@ Search the project for `TODO` — every placeholder is also marked with a commen
   - Adjust skill levels and interests in About page
 - [ ] Visual assets (optional):
   - Replace `hero-illustration.svg` and `portrait.svg` with your own images
-  - Regenerate `og-image.png` after changing name
+  - Regenerate `og-image.jpg` after changing name
   - Create custom favicon/monogram if desired
 
 ### Quality checks:
