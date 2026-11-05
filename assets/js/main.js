@@ -74,7 +74,7 @@
      The choice is stored in localStorage; without a stored choice the
      site follows the operating system setting.
      ------------------------------------------------------------------ */
-  var THEME_KEY = "alex-site-theme";
+  var THEME_KEY = "czh-site-theme";
 
   function storedTheme() {
     try { return window.localStorage.getItem(THEME_KEY); }

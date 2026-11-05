@@ -48,7 +48,7 @@ Each project has its own dedicated sub-page with full functionality:
 |---------|------|-------------|
 | 🍅 **Study Timer** | `study-timer.html` | Pomodoro-based study tool with multiple modes, task tracking, statistics, and notifications |
 | 🃏 **Card Game** | `card-game.html` | Browser-based card game with complete game logic, turn-based gameplay, and clean UI |
-| 🔐 **Password Generator** | `password-generator.html` | Secure password generator with customizable options, real-time strength meter, and one-click copy |
+| 🔐 **Password Generator** | `password-generator.html` | In-browser password generator with customizable options, real-time strength meter, and one-click copy |
 | 🤖 **Useless Machine** | `useless-machine.html` | Fun interactive animation where a finger pushes a toggle switch back |
 
 All projects feature:
@@ -73,7 +73,7 @@ All projects feature:
 ├── Interactive Projects
 │   ├── study-timer.html        Pomodoro study timer
 │   ├── card-game.html          Browser card game
-│   ├── password-generator.html Secure password generator
+│   ├── password-generator.html In-browser password generator
 │   └── useless-machine.html    Interactive animation project
 │
 ├── Configuration
@@ -133,7 +133,7 @@ Then open <http://127.0.0.1:8899/>.
 **Interactive project sub-pages (4):**
 - `study-timer.html` — Full-featured Pomodoro timer with multiple modes
 - `card-game.html` — Browser-based card game with game logic
-- `password-generator.html` — Secure password generator with strength meter
+- `password-generator.html` — In-browser password generator with strength meter
 - `useless-machine.html` — Fun animation project with finger interaction
 
 Each main page carries the same `<nav>` in the header listing all four, plus a second

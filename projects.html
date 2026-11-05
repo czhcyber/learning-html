@@ -30,7 +30,7 @@
   <script>
     (function () {
       try {
-        var saved = localStorage.getItem("alex-site-theme");
+        var saved = localStorage.getItem("czh-site-theme");
         var dark = saved === "dark" ||
           (!saved && window.matchMedia("(prefers-color-scheme: dark)").matches);
         if (dark) { document.documentElement.setAttribute("data-theme", "dark"); }
@@ -124,8 +124,8 @@
                 <h3>Study Timer</h3>
                 <p>
                   A countdown timer for revision sessions. I built it because every timer
-                  app I tried wanted an account. It stores your last session length in
-                  local storage and does nothing else.
+                  app I tried wanted an account. It has three modes, a task list, a streak counter, a statistics panel and
+                  browser notifications — all saved in local storage, with no account.
                 </p>
                 <ul class="tag-list">
                   <li>HTML</li>
@@ -145,7 +145,7 @@
               <div class="project-body">
                 <h3>Card Game</h3>
                 <p>
-                  A browser-based card game where two players take turns drawing and
+                  A browser-based card game where you take turns against the computer, drawing and
                   playing cards. Built to explore DOM manipulation and game state
                   management in vanilla JavaScript — no libraries, just shuffling logic
                   and a clean UI.
@@ -168,8 +168,8 @@
               <div class="project-body">
                 <h3>Password Generator</h3>
                 <p>
-                  A secure password generator that creates random, strong passwords
-                  instantly. Customize length, character types, and check strength in
+                  A password generator that runs entirely in your browser — nothing you type
+                  leaves the page. Customize length, character types, and check strength in
                   real-time. Built for anyone who needs better passwords without the hassle.
                 </p>
                 <ul class="tag-list">
@@ -270,7 +270,7 @@
     </div>
 
     <div class="container footer-bottom">
-      <p>&copy; <span data-current-year>2025</span> Cui Zhongheng. Built by hand.</p>
+      <p>&copy; <span data-current-year>2026</span> Cui Zhongheng. Built by hand.</p>
     </div>
   </footer>
 
