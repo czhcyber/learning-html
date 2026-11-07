@@ -22,7 +22,7 @@
   <meta property="og:image" content="https://czhcyber.github.io/learning-html/assets/img/og-image.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Cui Zhongheng — personal website">
+  <meta property="og:image:alt" content="Cui Zhongheng — learning website">
   <meta name="twitter:card" content="summary_large_image">
 
   <script>
@@ -58,12 +58,7 @@
       </button>
 
       <nav class="site-nav" id="site-nav" aria-label="Main navigation">
-        <ul class="nav-list">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html" aria-current="page">Quote</a></li>
-          <li><a href="projects.html">Projects</a></li>
-          <li><a href="contact.html">Now</a></li>
-        </ul>
+        <ul class="nav-list" data-nav-list></ul>
       </nav>
 
       <button class="theme-toggle" type="button" aria-pressed="false">
@@ -244,6 +239,36 @@
             </footer>
           </article>
 
+          <article class="card quote-card" data-category="principle">
+            <span class="quote-category">principle</span>
+            <blockquote>
+              <p>Controlling complexity is the essence of computer programming.</p>
+            </blockquote>
+            <footer>
+              <cite>Brian Kernighan</cite>, <span class="quote-source">Software Tools</span>
+            </footer>
+          </article>
+
+          <article class="card quote-card" data-category="craft">
+            <span class="quote-category">craft</span>
+            <blockquote>
+              <p>Make it work, make it right, make it fast.</p>
+            </blockquote>
+            <footer>
+              <cite>Kent Beck</cite>
+            </footer>
+          </article>
+
+          <article class="card quote-card" data-category="debug">
+            <span class="quote-category">debug</span>
+            <blockquote>
+              <p>Deleted code is debugged code.</p>
+            </blockquote>
+            <footer>
+              <cite>Jeff Sickel</cite>
+            </footer>
+          </article>
+
         </div>
       </div>
     </section>
@@ -284,6 +309,7 @@
     </div>
   </footer>
 
+  <script src="nav.js" defer></script>
   <script src="assets/js/main.js" defer></script>
 </body>
 </html>

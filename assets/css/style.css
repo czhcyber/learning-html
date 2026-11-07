@@ -1303,3 +1303,54 @@ html.js .skill-fill.is-measured { width: var(--level, 0%); }
     color: #444;
   }
 }
+/* Project ideas list */
+.section-intro {
+  max-width: 62ch;
+  margin: 0.9rem 0 0;
+  color: var(--text-muted);
+}
+
+.idea-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 3rem;
+  margin: 2.5rem 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--border);
+}
+
+.idea-list li {
+  display: flex;
+  gap: 1rem;
+  padding: 1.4rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.idea-index {
+  flex: 0 0 auto;
+  padding-top: 0.2rem;
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.idea-list h3 {
+  margin: 0;
+  font-size: 1.02rem;
+  letter-spacing: -0.015em;
+}
+
+.idea-list p {
+  margin: 0.4rem 0 0;
+  color: var(--text-muted);
+  font-size: 0.94rem;
+  line-height: 1.55;
+}
+
+@media (max-width: 760px) {
+  .idea-list {
+    grid-template-columns: 1fr;
+  }
+}

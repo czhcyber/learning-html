@@ -22,7 +22,7 @@
   <meta property="og:image" content="https://czhcyber.github.io/learning-html/assets/img/og-image.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Cui Zhongheng — personal website">
+  <meta property="og:image:alt" content="Cui Zhongheng — learning website">
   <meta name="twitter:card" content="summary_large_image">
 
   <!-- Set the colour theme before the first paint, so a dark-theme visitor
@@ -60,12 +60,7 @@
       </button>
 
       <nav class="site-nav" id="site-nav" aria-label="Main navigation">
-        <ul class="nav-list">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">Quote</a></li>
-          <li><a href="projects.html" aria-current="page">Projects</a></li>
-          <li><a href="contact.html">Now</a></li>
-        </ul>
+        <ul class="nav-list" data-nav-list></ul>
       </nav>
 
       <button class="theme-toggle" type="button" aria-pressed="false">
@@ -208,6 +203,55 @@
       </div>
     </section>
 
+    <!-- ===================== IDEAS ===================== -->
+    <section class="section" aria-labelledby="ideas-title">
+      <div class="container">
+        <p class="eyebrow">Next / on paper</p>
+        <h2 id="ideas-title">Five ideas I want to build</h2>
+        <p class="section-intro">
+          Not every idea needs to become a finished project. These are the five I keep
+          coming back to when I have a free weekend.
+        </p>
+        <ol class="idea-list">
+          <li>
+            <span class="idea-index">01</span>
+            <div>
+              <h3>Weather journal</h3>
+              <p>A small log that connects local weather with mood, sleep and study hours.</p>
+            </div>
+          </li>
+          <li>
+            <span class="idea-index">02</span>
+            <div>
+              <h3>Keyboard sketchpad</h3>
+              <p>A drawing toy that works without a mouse, using only the arrow keys and space.</p>
+            </div>
+          </li>
+          <li>
+            <span class="idea-index">03</span>
+            <div>
+              <h3>Exam-week planner</h3>
+              <p>A timetable that starts from the exam date and works backwards, one block at a time.</p>
+            </div>
+          </li>
+          <li>
+            <span class="idea-index">04</span>
+            <div>
+              <h3>Recipe scaler</h3>
+              <p>Pick a recipe, change the servings, and see every ingredient update without rounding surprises.</p>
+            </div>
+          </li>
+          <li>
+            <span class="idea-index">05</span>
+            <div>
+              <h3>A local business site</h3>
+              <p>A real, small site for a shop or studio near me — useful, fast and easy to maintain.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
     <!-- ===================== WHAT I LEARNED ===================== -->
     <section class="section section-alt" aria-labelledby="lessons-title">
       <div class="container">
@@ -274,6 +318,7 @@
     </div>
   </footer>
 
+  <script src="nav.js" defer></script>
   <script src="assets/js/main.js" defer></script>
 </body>
 </html>
